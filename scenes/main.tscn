@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgy7nd0e24q6y"]
+[gd_scene load_steps=21 format=3 uid="uid://dgy7nd0e24q6y"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_aqx1i"]
 [ext_resource type="PackedScene" uid="uid://bql0f4pdji8ss" path="res://scenes/player.tscn" id="2_4n4kg"]
@@ -7,8 +7,19 @@
 [ext_resource type="Script" path="res://scripts/nodescript/node2.gd" id="5_wqbxy"]
 [ext_resource type="Script" path="res://scripts/nodescript/node3.gd" id="6_bjbhh"]
 [ext_resource type="Script" path="res://scripts/nodescript/node4.gd" id="7_youuv"]
-[ext_resource type="Script" path="res://scenes/node5.gd" id="8_fhtkm"]
+[ext_resource type="Script" path="res://scripts/node5.gd" id="8_fhtkm"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="9_twhn5"]
+[ext_resource type="Script" path="res://scripts/nodescript/node5.gd" id="10_st41d"]
+[ext_resource type="Script" path="res://scenes/node7.gd" id="11_f4jf8"]
+[ext_resource type="Script" path="res://scenes/node8.gd" id="12_naqnj"]
+[ext_resource type="Script" path="res://scenes/node9.gd" id="13_qc51s"]
+[ext_resource type="Script" path="res://scenes/node10.gd" id="14_n6n7s"]
+[ext_resource type="Script" path="res://scenes/node11.gd" id="15_hsste"]
+[ext_resource type="Script" path="res://scenes/node12.gd" id="16_8b24p"]
+[ext_resource type="Script" path="res://scenes/node13.gd" id="17_jio5t"]
+[ext_resource type="Script" path="res://scenes/node14.gd" id="18_blqqc"]
+[ext_resource type="Script" path="res://scenes/node15.gd" id="19_svhsa"]
+[ext_resource type="Script" path="res://scenes/node16.gd" id="20_ujy7k"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_aqx1i")
@@ -49,36 +60,47 @@ script = ExtResource("8_fhtkm")
 
 [node name="Node6" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(3, 562)
+script = ExtResource("10_st41d")
 
 [node name="Node7" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(313, 742)
+script = ExtResource("11_f4jf8")
 
 [node name="Node8" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(773, 726)
+script = ExtResource("12_naqnj")
 
 [node name="Node9" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(1092, 621)
+script = ExtResource("13_qc51s")
 
 [node name="Node10" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(1202, 288)
+script = ExtResource("14_n6n7s")
 
 [node name="Node11" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(218, -99)
+script = ExtResource("15_hsste")
 
 [node name="Node12" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(530, -221)
+script = ExtResource("16_8b24p")
 
 [node name="Node13" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(851, -61)
+script = ExtResource("17_jio5t")
 
 [node name="Node14" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(-308, 112)
+script = ExtResource("18_blqqc")
 
 [node name="Node15" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(-351, 239)
+script = ExtResource("19_svhsa")
 
 [node name="Node16" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(-308, 371)
+script = ExtResource("20_ujy7k")
 
 [node name="Node17" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(-253, 579)
