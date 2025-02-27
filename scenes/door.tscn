@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://4lkgbikec3kt"]
+
+[ext_resource type="Texture2D" uid="uid://cxkyc80e7g718" path="res://pngtree-enter-door-glyph-icon-vector-png-image_5079304.jpg" id="1_h7m4u"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_jsaeg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8b7x"]
+size = Vector2(1258.28, 1200)
+
+[sub_resource type="LabelSettings" id="LabelSettings_upg1b"]
+font_size = 500
+
+[node name="door" type="Node2D"]
+scale = Vector2(0.333785, 0.290827)
+script = ExtResource("1_jsaeg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+position = Vector2(9.00001, -18)
+scale = Vector2(0.420417, 0.516667)
+texture = ExtResource("1_h7m4u")
+
+[node name="Area2D" type="Area2D" parent="Camera2D/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Sprite2D/Area2D"]
+position = Vector2(27.3538, 1.93549)
+shape = SubResource("RectangleShape2D_w8b7x")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -1007.0
+offset_top = -656.0
+offset_right = 1079.0
+offset_bottom = 763.0
+label_settings = SubResource("LabelSettings_upg1b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Camera2D/Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]

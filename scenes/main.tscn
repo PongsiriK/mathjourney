@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://dgy7nd0e24q6y"]
+[gd_scene load_steps=24 format=3 uid="uid://dgy7nd0e24q6y"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_aqx1i"]
 [ext_resource type="PackedScene" uid="uid://bql0f4pdji8ss" path="res://scenes/player.tscn" id="2_4n4kg"]
 [ext_resource type="PackedScene" uid="uid://bqmctv5ywuvhr" path="res://scenes/node.tscn" id="3_m4kih"]
 [ext_resource type="Script" path="res://scripts/nodescript/node1.gd" id="4_dwoyr"]
+[ext_resource type="Texture2D" uid="uid://dmtippcgwhgd5" path="res://24579420f6eb1d2.jpg" id="4_fcnm7"]
 [ext_resource type="Script" path="res://scripts/nodescript/node2.gd" id="5_wqbxy"]
 [ext_resource type="Script" path="res://scripts/nodescript/node3.gd" id="6_bjbhh"]
 [ext_resource type="Script" path="res://scripts/nodescript/node4.gd" id="7_youuv"]
@@ -20,6 +21,8 @@
 [ext_resource type="Script" path="res://scenes/node14.gd" id="18_blqqc"]
 [ext_resource type="Script" path="res://scenes/node15.gd" id="19_svhsa"]
 [ext_resource type="Script" path="res://scenes/node16.gd" id="20_ujy7k"]
+[ext_resource type="PackedScene" uid="uid://cxgwhyv3733l4" path="res://scenes/key.tscn" id="22_3mcbc"]
+[ext_resource type="PackedScene" uid="uid://4lkgbikec3kt" path="res://scenes/door.tscn" id="23_o1vti"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_aqx1i")
@@ -37,6 +40,20 @@ offset_left = -262.0
 offset_top = 249.0
 offset_right = 198.0
 offset_bottom = 280.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="Player/Camera2D"]
+position = Vector2(-515, -266)
+scale = Vector2(0.175, 0.155556)
+texture = ExtResource("4_fcnm7")
+
+[node name="Label" type="Label" parent="Player/Camera2D"]
+offset_left = -467.0
+offset_top = -275.0
+offset_right = -417.0
+offset_bottom = -252.0
+text = "0"
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Camera2D"]
 
 [node name="Node1" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(535, 280)
@@ -173,5 +190,14 @@ position = Vector2(1077, -187)
 
 [node name="Node40" parent="." instance=ExtResource("3_m4kih")]
 position = Vector2(1145, -20)
+
+[node name="key" parent="." instance=ExtResource("22_3mcbc")]
+position = Vector2(294, 321)
+
+[node name="key2" parent="." instance=ExtResource("22_3mcbc")]
+position = Vector2(0, 516)
+
+[node name="door" parent="." instance=ExtResource("23_o1vti")]
+position = Vector2(512, -58)
 
 [connection signal="text_submitted" from="Player/Camera2D/InputBox" to="." method="_on_input_box_text_submitted"]
