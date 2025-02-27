@@ -1,0 +1,155 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgy7nd0e24q6y"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_aqx1i"]
+[ext_resource type="PackedScene" uid="uid://bql0f4pdji8ss" path="res://scenes/player.tscn" id="2_4n4kg"]
+[ext_resource type="PackedScene" uid="uid://bqmctv5ywuvhr" path="res://scenes/node.tscn" id="3_m4kih"]
+[ext_resource type="Script" path="res://scripts/nodescript/node1.gd" id="4_dwoyr"]
+[ext_resource type="Script" path="res://scripts/nodescript/node2.gd" id="5_wqbxy"]
+[ext_resource type="Script" path="res://scripts/nodescript/node3.gd" id="6_bjbhh"]
+[ext_resource type="Script" path="res://scripts/nodescript/node4.gd" id="7_youuv"]
+[ext_resource type="Script" path="res://scenes/node5.gd" id="8_fhtkm"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="9_twhn5"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_aqx1i")
+
+[node name="Player" parent="." instance=ExtResource("2_4n4kg")]
+z_index = 1
+position = Vector2(533, 234)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(18, 27)
+script = ExtResource("9_twhn5")
+
+[node name="InputBox" type="LineEdit" parent="Player/Camera2D"]
+offset_left = -262.0
+offset_top = 249.0
+offset_right = 198.0
+offset_bottom = 280.0
+
+[node name="Node1" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(535, 280)
+script = ExtResource("4_dwoyr")
+
+[node name="Node2" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(297, 370)
+script = ExtResource("5_wqbxy")
+
+[node name="Node3" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(815, 384)
+script = ExtResource("6_bjbhh")
+
+[node name="Node4" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(513, 31)
+script = ExtResource("7_youuv")
+
+[node name="Node5" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-114, 237)
+script = ExtResource("8_fhtkm")
+
+[node name="Node6" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(3, 562)
+
+[node name="Node7" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(313, 742)
+
+[node name="Node8" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(773, 726)
+
+[node name="Node9" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1092, 621)
+
+[node name="Node10" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1202, 288)
+
+[node name="Node11" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(218, -99)
+
+[node name="Node12" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(530, -221)
+
+[node name="Node13" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(851, -61)
+
+[node name="Node14" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-308, 112)
+
+[node name="Node15" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-351, 239)
+
+[node name="Node16" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-308, 371)
+
+[node name="Node17" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-253, 579)
+
+[node name="Node18" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-187, 728)
+
+[node name="Node19" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-39, 821)
+
+[node name="Node20" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(144, 950)
+
+[node name="Node21" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(259, 1003)
+
+[node name="Node22" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(389, 1013)
+
+[node name="Node23" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(692, 1039)
+
+[node name="Node24" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(834, 1013)
+
+[node name="Node25" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(971, 961)
+
+[node name="Node26" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1146, 889)
+
+[node name="Node27" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1258, 799)
+
+[node name="Node28" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1334, 697)
+
+[node name="Node29" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1403, 471)
+
+[node name="Node30" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1446, 311)
+
+[node name="Node31" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1400, 160)
+
+[node name="Node32" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(-69, -95)
+
+[node name="Node33" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(10, -241)
+
+[node name="Node34" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(189, -311)
+
+[node name="Node35" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(367, -419)
+
+[node name="Node36" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(567, -470)
+
+[node name="Node37" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(746, -380)
+
+[node name="Node38" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(925, -311)
+
+[node name="Node39" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1077, -187)
+
+[node name="Node40" parent="." instance=ExtResource("3_m4kih")]
+position = Vector2(1145, -20)
+
+[connection signal="text_submitted" from="Player/Camera2D/InputBox" to="." method="_on_input_box_text_submitted"]
