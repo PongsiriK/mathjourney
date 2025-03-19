@@ -5,6 +5,8 @@
 	#position = target_position
 extends Node2D
 
+func _ready() -> void:
+	position = get_viewport_rect().size / 2
 #var current_node : Node2D  # โหนดที่ตัวละครยืนอยู่
 #
 #func _ready():

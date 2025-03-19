@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://hg0mf3fkg6uk"]
+
+[ext_resource type="Script" path="res://scripts/newnode.gd" id="1_tfde3"]
+[ext_resource type="Texture2D" uid="uid://cnv8drox2cl3o" path="res://รูปวงกลม.png" id="2_mfjmt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fmupq"]
+radius = 56.0089
+
+[sub_resource type="LabelSettings" id="LabelSettings_2o5tb"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Newnode" type="Node2D"]
+script = ExtResource("1_tfde3")
+
+[node name="รูปวงกลม" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_mfjmt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fmupq")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -21.0
+offset_right = 41.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_2o5tb")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

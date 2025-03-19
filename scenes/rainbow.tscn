@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhxvmw37kv54h"]
+
+[ext_resource type="Script" path="res://scripts/rainbow.gd" id="1_ms0oc"]
+[ext_resource type="Texture2D" uid="uid://cxkyc80e7g718" path="res://pngtree-enter-door-glyph-icon-vector-png-image_5079304.jpg" id="2_4smv0"]
+
+[node name="rainbow" type="Node2D"]
+scale = Vector2(0.664205, 0.101595)
+script = ExtResource("1_ms0oc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.00001, -18)
+rotation = 3.14159
+scale = Vector2(0.420417, 0.516667)
+texture = ExtResource("2_4smv0")
