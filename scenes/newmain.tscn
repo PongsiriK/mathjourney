@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4ti4oqk7cjs6"]
+[gd_scene load_steps=5 format=3 uid="uid://c4ti4oqk7cjs6"]
 
 [ext_resource type="Script" path="res://scripts/newmain.gd" id="1_h5uav"]
 [ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="2_wyfh8"]
-[ext_resource type="PackedScene" uid="uid://bql0f4pdji8ss" path="res://scripts/nodescript/player.tscn" id="3_446vs"]
 [ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="3_u2li7"]
 [ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="4_v53l3"]
 
@@ -22,12 +21,8 @@ offset_right = 236.0
 offset_bottom = 280.0
 
 [node name="door" parent="cameraOfMain/LineEdit" instance=ExtResource("3_u2li7")]
-position = Vector2(278, -295)
-
-[node name="Player" parent="." instance=ExtResource("3_446vs")]
-visible = false
-z_index = 1
-position = Vector2(576, 323)
+position = Vector2(277, -281)
+scale = Vector2(0.663123, 0.563251)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_v53l3")]
 position = Vector2(582, 331)

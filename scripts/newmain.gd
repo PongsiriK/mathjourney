@@ -2,6 +2,8 @@ extends Node2D
 
 var node_scene = preload("res://scenes/newnode.tscn")
 var bridge_scence =  preload("res://scenes/rainbow.tscn")
+var potion_scene = preload("res://scenes/potion.tscn")
+var key_scene = preload("res://scenes/key.tscn")
 #@onready var player = $Player
 @onready var input_answer = $cameraOfMain/LineEdit
 @onready var camera = $cameraOfMain
@@ -10,19 +12,24 @@ var bridge_scence =  preload("res://scenes/rainbow.tscn")
 var max_depth = 4
 #var numOfNode = 0
 var curent_node
-var speed = 200
+var speed = 500
 var checkAnswer = []
-var key_scene = preload("res://scenes/key.tscn")
+
 var node_pack = []
 var node_pack_no1 = []
 var node_pack_no2 = []
 var node_pack_no3 = []
+var node_pack_no4 = []
 
 var node_random_key1 = []
 var node_random_key2 = []
 var node_random_key3 = []
 
 var key_node = []
+var potion_node = []
+
+
+
 
 #func _process(delta: float) -> void:
 func _process(delta: float) -> void:
@@ -129,8 +136,8 @@ func _ready() -> void:
 	#set_pos_key(node_pack_no2)
 	#set_pos_key(node_pack_no3)
 	set_pos_key(node_random_key1)
-	set_pos_key(node_random_key1)
-	set_pos_key(node_random_key1)
+	set_pos_key(node_random_key2)
+	set_pos_key(node_random_key3)
 	
    # depth เริ่มที่ 1
 	#print("Node have ", numOfNode)
@@ -141,15 +148,22 @@ func _ready() -> void:
 	print(node_pack_no1 ,"\n")
 	print(node_pack_no2,"\n")
 	print(node_pack_no3,"\n")
+	
+	create_potion(8)
 # ฟังก์ชันสร้างโหนดลูก
 func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , group: int) -> void:
 	#if depth == max_depth - 1 :
 		#print
 	if depth >= max_depth:
-		print("===================================================")
+		
 		print(parent_node)
-		node_random_key1.append(parent_node)
-		print("===================================================")
+		match group:
+			1:
+				node_random_key1.append(parent_node)
+			2:
+				node_random_key2.append(parent_node)
+			3:
+				node_random_key3.append(parent_node)
 		return  # หยุดเมื่อถึงระดับที่กำหนด
 	
 	
@@ -195,12 +209,15 @@ func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , g
 		match group:
 			1:
 				node_pack_no1.append(child_node)
+				node_pack_no4.append(child_node)
 				create_child_nodes(child_node, angle_degree , depth + 1 , 1)
 			2:
 				node_pack_no2.append(child_node)
+				node_pack_no4.append(child_node)
 				create_child_nodes(child_node, angle_degree , depth + 1 , 2)
 			3:
 				node_pack_no3.append(child_node)
+				node_pack_no4.append(child_node)
 				create_child_nodes(child_node, angle_degree , depth + 1 , 3)
 
 		# สร้างโหนดลูกของ child_node (recursive)
@@ -362,11 +379,25 @@ func set_pos_key(group:Array) :
 	print(group[locationKey].global_position)
 	print("+++++++++++++++++++++++++++++")
 	
-	key_node = group
+	key_node.append(group)
 	
 	print(key_node)
 	
-	
 	key.z_index = 0
 	group[locationKey].add_child(key)
+	
+func create_potion( num :int) :
+
+	for i in range(num) :
+		
+		print("num :", i)
+		var random_num = randi_range(1, node_pack_no4.size() - 1 )
+		#var random_num =  node_pack.size() 
+		var posion = potion_scene.instantiate()
+		var random_node = node_pack_no4[random_num]
+		if not random_node in potion_node and not random_node in key_node:
+			random_node.add_child(posion)
+			potion_node.append(random_node)
+	
+	print(potion_node)
 	

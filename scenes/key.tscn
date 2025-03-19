@@ -1,23 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxgwhyv3733l4"]
+[gd_scene load_steps=3 format=3 uid="uid://cvdtrxkcriqal"]
 
 [ext_resource type="Texture2D" uid="uid://dmtippcgwhgd5" path="res://24579420f6eb1d2.jpg" id="1_4s2t7"]
-[ext_resource type="Script" path="res://scripts/key.gd" id="1_ckeqi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i2nl"]
-size = Vector2(359.999, 835.714)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1u5j6"]
+radius = 46.0977
 
-[node name="key" type="Node2D"]
-script = ExtResource("1_ckeqi")
+[node name="key" type="Area2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -50)
-scale = Vector2(0.0777778, 0.0777778)
+[node name="24579420f6Eb1d2" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_4s2t7")
 
-[node name="Area2D" type="Area2D" parent="Sprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(-0.000244141, 237.857)
-shape = SubResource("RectangleShape2D_0i2nl")
-
-[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1u5j6")

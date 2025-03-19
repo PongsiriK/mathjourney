@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtvww0p2h7xqe"]
+
+[ext_resource type="Texture2D" uid="uid://cnv8drox2cl3o" path="res://รูปวงกลม.png" id="1_uh37e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4b45o"]
+
+[node name="potion" type="Area2D"]
+
+[node name="รูปวงกลม" type="Sprite2D" parent="."]
+scale = Vector2(0.263995, 0.974145)
+texture = ExtResource("1_uh37e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="รูปวงกลม"]
+scale = Vector2(7.07919, 5.22307)
+shape = SubResource("CapsuleShape2D_4b45o")
