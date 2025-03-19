@@ -4,14 +4,23 @@ extends Node2D
 var child_nodes = []
 var myParent_node 
 #var my = preload("res://scenes/newnode.tscn")
-@onready var show_equation = $Label
+@onready var display_equation = $Label
 var answer : int 
+var connect_to = []
 #var player = preload("res://scenes/player.tscn").instantiate()
 
-func set_equation(equation:String):
-	show_equation.text = equation
 func _ready() -> void:
 	hide()
+
+func add_connect_node(rainbow:Node2D):
+	connect_to.append(rainbow)
+
+func get_connect_node() -> Array:
+	return connect_to
+
+func set_equation(equation:String):
+	display_equation.text = equation
+
 	#show_equation.text = generate_equation()
 	
 func add_myParent(node:Node2D):
@@ -67,7 +76,12 @@ func get_Arraychild_nodes() -> Array :
 func get_parent_node() -> Node2D :
 	return myParent_node
 	
+func show_equation() :
+	display_equation.show()
 
+func hide_equation() :
+	display_equation.hide()
+	
 
 
 
@@ -77,7 +91,7 @@ func get_parent_node() -> Node2D :
 signal player_entered_area(Mynode:Node2D,body: Node2D)
 # ฟังก์ชั่นที่ตรวจจับการเข้าไปของ player
 func _on_area_2d_body_entered(body: Node2D) -> void :
-	show()
+	#show()
 	emit_signal("player_entered_area", self , body)
 		
 	#print("++++++++++++++++++" , name,"  ",body)

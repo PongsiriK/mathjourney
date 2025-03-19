@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b23crrlshmmj5"]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_o4oor"]
+[ext_resource type="Texture2D" uid="uid://cxkyc80e7g718" path="res://pngtree-enter-door-glyph-icon-vector-png-image_5079304.jpg" id="1_r5ssa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mt7j"]
+size = Vector2(169, 226)
+
+[node name="door" type="Area2D"]
+script = ExtResource("1_o4oor")
+
+[node name="Pngtree-enter-door-glyph-icon-vector-png-image5079304" type="Sprite2D" parent="."]
+position = Vector2(4, -30)
+scale = Vector2(0.142939, 0.190484)
+texture = ExtResource("1_r5ssa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, -29)
+shape = SubResource("RectangleShape2D_7mt7j")

@@ -10,8 +10,8 @@ func _ready() -> void:
 
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	hide()
-	key += 1
-	label.text = str(key)
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#hide()
+	#key += 1
+	#label.text = str(key)
 	# Replace with function body.

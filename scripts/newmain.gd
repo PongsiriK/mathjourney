@@ -8,9 +8,21 @@ var bridge_scence =  preload("res://scenes/rainbow.tscn")
 @onready var player = $CharacterBody2D
 #var nodes = []
 var max_depth = 4
-var numOfNode = 0
+#var numOfNode = 0
 var curent_node
 var speed = 200
+var checkAnswer = []
+var key_scene = preload("res://scenes/key.tscn")
+var node_pack = []
+var node_pack_no1 = []
+var node_pack_no2 = []
+var node_pack_no3 = []
+
+var node_random_key1 = []
+var node_random_key2 = []
+var node_random_key3 = []
+
+var key_node = []
 
 #func _process(delta: float) -> void:
 func _process(delta: float) -> void:
@@ -44,7 +56,7 @@ func _ready() -> void:
 	 # เก็บตำแหน่งของโหนดทั้งหมด
 	
 	var start_node = node_scene.instantiate()
-	start_node.connect("player_entered_area",_on_area_2d_body_exited)
+	
 	
 	curent_node = start_node
 	
@@ -55,19 +67,27 @@ func _ready() -> void:
 	
 	start_node.position = center_position
 	#nodes.append(node_mom)
-	numOfNode += 1
+	
 	add_child(start_node)
+	
+	node_pack.append(start_node)
+	
+	
+	
+	#start_node.show()
+	start_node.connect("player_entered_area",_on_area_2d_body_entered)
+	start_node.connect("player_exited_area",_on_area_2d_body_exited)
+	
+	
 	var excluded_answers = []
-	
-	excluded_answers.append(random_equation(start_node,excluded_answers))
-	start_node.show()
-	
+	random_equation(start_node,excluded_answers)
 	
 	for i in range(3):
 		
 		var node = node_scene.instantiate()
 		node.connect("player_entered_area",_on_area_2d_body_entered)
-		numOfNode += 1
+		node.connect("player_exited_area",_on_area_2d_body_exited)
+		
 		node.name = "node" + str(i+1)
 		print(node.name , " IsMade")
 		var angle_degree = 30 + (i * 120)
@@ -80,31 +100,67 @@ func _ready() -> void:
 		
 		node.position = Vector2(x, y)  # ตั้งค่าตำแหน่งให้เป็นวงกลม
 		start_node.add_child(node)
-		
-		excluded_answers.append(random_equation(node,excluded_answers))
-		
 		node.add_myParent(start_node)
 		start_node.add_child_node(node)
+		
+		node_pack.append(node)
+		
+		random_equation(node,excluded_answers)
+		
+		
 		
 		#nodes.append(node)
 		create_bridge(start_node,node)
 		#create_child_nodes(node, 30 + (i * 120))
-		create_child_nodes(node, angle_degree, 1)
 		
 		
+		match i + 1:
+			1:
+				create_child_nodes(node, angle_degree, 1 ,1)
+			2:
+				create_child_nodes(node, angle_degree, 1, 2)
+			3:
+				create_child_nodes(node, angle_degree, 1 ,3)
+		
+	
+	
+	node_show(start_node)
+	#set_pos_key(node_pack_no1)
+	#set_pos_key(node_pack_no2)
+	#set_pos_key(node_pack_no3)
+	set_pos_key(node_random_key1)
+	set_pos_key(node_random_key1)
+	set_pos_key(node_random_key1)
+	
    # depth เริ่มที่ 1
 	#print("Node have ", numOfNode)
-	print(excluded_answers)
-
+	print(node_pack.size())
+	print(node_pack_no1.size())
+	print(node_pack_no2.size())
+	print(node_pack_no3.size())
+	print(node_pack_no1 ,"\n")
+	print(node_pack_no2,"\n")
+	print(node_pack_no3,"\n")
 # ฟังก์ชันสร้างโหนดลูก
-func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int) -> void:
+func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , group: int) -> void:
+	#if depth == max_depth - 1 :
+		#print
 	if depth >= max_depth:
+		print("===================================================")
+		print(parent_node)
+		node_random_key1.append(parent_node)
+		print("===================================================")
 		return  # หยุดเมื่อถึงระดับที่กำหนด
-
+	
+	
+		
+	
+	
 	var radius_node = 250 - (depth*20)  # ลดระยะห่างเมื่อระดับสูงขึ้น
 	#var radius_node = 250 
 	#var excluded_answers = []
-	
+	var ex_answers = []
+	ex_answers.append(parent_node)
 	for i in range(2):
 		#var angle_offset = -30 if i == 0 else 30
 		var angle_offset = -30 + (90 * i)  # มุมที่กระจายออกจากโหนดแม่
@@ -114,8 +170,8 @@ func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int) ->
 		var angle = deg_to_rad(angle_degree )
 		var child_node = node_scene.instantiate()
 		child_node.connect("player_entered_area",_on_area_2d_body_entered)
-		child_node.connect("player_exited_area",_on_area_2d_body_entered)
-		numOfNode += 1
+		child_node.connect("player_exited_area",_on_area_2d_body_exited)
+		
 		child_node.name = parent_node.name + "|" + str(i+1)
 
 		var x = radius_node * cos(angle)
@@ -124,6 +180,9 @@ func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int) ->
 		child_node.position = Vector2(x, y)
 		parent_node.add_child(child_node)
 		
+		node_pack.append(child_node)
+		
+		random_equation(child_node,ex_answers)
 		#excluded_answers.append(random_equation(child_node,excluded_answers))
 		#print("ans of ", child_node.name , ": " , str(child_node.get_answer()))
 		
@@ -132,9 +191,20 @@ func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int) ->
 		parent_node.add_child_node(child_node)
 		#nodes.append(child_node)
 		create_bridge(parent_node, child_node)
+		
+		match group:
+			1:
+				node_pack_no1.append(child_node)
+				create_child_nodes(child_node, angle_degree , depth + 1 , 1)
+			2:
+				node_pack_no2.append(child_node)
+				create_child_nodes(child_node, angle_degree , depth + 1 , 2)
+			3:
+				node_pack_no3.append(child_node)
+				create_child_nodes(child_node, angle_degree , depth + 1 , 3)
 
 		# สร้างโหนดลูกของ child_node (recursive)
-		create_child_nodes(child_node, angle_degree , depth + 1)
+		#create_child_nodes(child_node, angle_degree , depth + 1 )
 
 
 
@@ -147,34 +217,51 @@ func create_bridge(start_node: Node2D, end_node: Node2D) -> void:
 	bridge.rotation = start.angle_to_point(end)  # หมุนให้ตรงกับแนวของสะพาน
 	bridge.z_index = -1
 	start_node.add_child(bridge)
+	start_node.add_connect_node(bridge)
 
 func _on_area_2d_body_entered(node :Node2D,body: Node2D) -> void:	
 	if body == player:
+		checkAnswer = []
 		curent_node = node
+		node_show(node)
+		node.hide_equation()
+		
 		print("Player เข้ามาในโหนด:", node.name )
-		var pack_answer = []
+		#var pack_answer = []
 		if node.get_parent_node() != null :
-			print(pack_answer)
-			pack_answer.append(random_equation(node.get_parent_node(),pack_answer))
-			print("mom: ",node.get_parent_node().name)
+			checkAnswer.append(node.get_parent_node().get_answer())
+			##print(pack_answer)
+			##pack_answer.append(random_equation(node.get_parent_node(),pack_answer))
+			#print("mom: ",node.get_parent_node().name)
 		if node.get_Arraychild_nodes() != null :
-			var i = 1
+			#var i = 1
 			for child in node.get_Arraychild_nodes() :
-				print(pack_answer)
-				pack_answer.append(random_equation(child,pack_answer))
-				child.show()
-				print("son",str(i),": ",child.name)
-				i += 1
-		if curent_node.get_answer() == null :
-			print("no aws" )
-		elif curent_node.get_answer() != null :
-			print("aws= ", curent_node.get_answer())
-			print("aws= ", curent_node.get_answer())
+				checkAnswer.append(child.get_answer())
+				##print(pack_answer)
+				##pack_answer.append(random_equation(child,pack_answer))
+				#print("son",str(i),": ",child.name)
+				#i += 1
+		print(checkAnswer)
+		#if curent_node.get_answer() == null :
+			#print("no aws" )
+		#elif curent_node.get_answer() != null :
+			#print("aws= ", curent_node.get_answer())
+		
 	
 	
 # ฟังก์ชันเมื่อร่างกายออกจากพื้นที่
 func _on_area_2d_body_exited(node: Node2D,body: Node2D) -> void:
-	pass
+	print("ออกไปล้วจ๊าลาก่อน " ,node.name)
+	var pack_answer = []
+	if node.get_parent_node() != null :
+		pack_answer.append(node.get_parent_node().get_answer())
+	if node.get_Arraychild_nodes() != null :
+		for child in node.get_Arraychild_nodes() :
+			pack_answer.append(child)
+		random_equation(node,pack_answer)
+	
+	
+	
 	
 func move_player_to_node(target_node: Node2D) -> void:
 	player.position = target_node.global_position
@@ -185,53 +272,32 @@ func move_player_to_node(target_node: Node2D) -> void:
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	input_answer.text = ""
+	print("ans ",new_text)
 	
-	
-	#for node in nodes:
-		#if check_answer_for_node(node, new_text):
-			#print("Correct answer!")
-			#return
-	#print("Wrong answer!")
-	#for node in nodes:
-		#if node.has_method("get_answer"):  # ตรวจสอบว่าโหนดมีฟังก์ชัน get_answer()
-			#if str(node.get_answer()) == new_text:  # ถ้าคำตอบตรงกัน
-				#move_player_to_node(node)  # เคลื่อนที่ไปโหนดนั้น
-				#return
-#func check_answer_for_node(node: Node2D, answer: String) -> bool:
-	## ตรวจสอบว่า answer ตรงกับชื่อโหนดแม่หรือโหนดลูก
-	#pass
-
-
-#func random_equation()-> String :
-	#
-	#var num1 = randi_range(-9, 9)
-	##var num2 = 0
-	#var num2 = randi_range(-9, 9)
-	#var random_operator = randi_range(0, 3)
-		#
-	#match random_operator :
-		#0:
-			#answer = num1 + num2
-		#1:
-			#answer = num1 - num2
-		#2:
-			#answer = num1 * num2
-		#3:	
-			#while num2 == 0 or num1 % num2 != 0:  
-				#num2 = randi_range(-9, 9)  # สุ่ม num2 ใหม่จนกว่าจะหารลงตัวและไม่เป็น 0
-			#answer = num1 / num2
-				#
-	#
-	#return  str(num1, " ", operator[random_operator]," ", num2, " = ?")
+	var pack_answer = []
+	if curent_node.get_parent_node()!= null :
+		pack_answer.append(curent_node.get_parent_node().get_answer())
+		if new_text.strip_edges() == str(curent_node.get_parent_node().get_answer()):
+			move_player_to_node(curent_node.get_parent_node())
+			
+	if curent_node.get_Arraychild_nodes() != null :
+		for child in curent_node.get_Arraychild_nodes() :
+				pack_answer.append(child.get_answer())
+				if new_text.strip_edges() == str(child.get_answer()) :
+					move_player_to_node(child)
+					
+	print(pack_answer)
 
 func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
-	var operator:Array = ["+","-","*","/"]
+	var operator:Array = ["+","-","×","÷"]
 	var num1: int
+	var num1str : String
 	var num2: int
+	var num2str : String
 	var random_operator: int
 	var new_answer: int
-
-	while new_answer in excluded_answers:
+	#nodeSetAnswer.show_equation()
+	while true :
 		num1 = randi_range(-9, 9)
 		num2 = randi_range(-9, 9)
 		random_operator = randi_range(0, 3)
@@ -246,11 +312,61 @@ func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
 			3:
 				while num2 == 0 or num1 % num2 != 0:
 					num2 = randi_range(-9, 9)
+					#if num2 < 0 :
+						#num2str = "(" + str(num2) +  ")"
 				new_answer = num1 / num2
-
+			
+		if num1 < 0 :
+			num1str = "(" + str(num1) +  ")"
+		
+		if num2 < 0 :
+			num2str = "(" + str(num2) +  ")"
+		
+		if num1 >= 0 :
+			num1str = str(num1)
+		
+		if num2 >= 0 :
+			num2str = str(num2)
+		
+		#if excluded_answers.size() == 0 : 
+			#nodeSetAnswer.set_answer(new_answer)
+			#nodeSetAnswer.set_equation(str(num1, " ", operator[random_operator], " ", num2, " = ?"))
 		# ถ้าคำตอบที่สุ่มได้ไม่อยู่ใน excluded_answers ให้ใช้คำตอบนี้
 		if not new_answer in excluded_answers:
 			nodeSetAnswer.set_answer(new_answer)
-			nodeSetAnswer.set_equation(str(num1, " ", operator[random_operator], " ", num2, " = ?"))
+			nodeSetAnswer.set_equation( ( num1str + " " + operator[random_operator] + " " + num2str + " = ?" ) )
+			nodeSetAnswer.show_equation()
+			excluded_answers.append(new_answer)
+			return new_answer
 	return new_answer
+	
+func node_show(node: Node2D):
+	node.show()
+	for child in node.get_Arraychild_nodes() :
+		child.show()
+	for rainbow in node.get_connect_node() :
+		rainbow.show()
+
+func node_hide(node: Node2D):
+	node.hide()
+	for child in node.get_Arraychild_nodes() :
+		child.hide()
+	for rainbow in node.get_connect_node :
+		rainbow.hide()
+	
+func set_pos_key(group:Array) :
+	var key = key_scene.instantiate()
+	print("+++++++++++++++++++++++++++++")
+	var locationKey = randi_range(0, group.size() - 1 )
+	#var locationKey = 0
+	print(group[locationKey].global_position)
+	print("+++++++++++++++++++++++++++++")
+	
+	key_node = group
+	
+	print(key_node)
+	
+	
+	key.z_index = 0
+	group[locationKey].add_child(key)
 	
