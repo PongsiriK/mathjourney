@@ -1,5 +1,6 @@
 extends Node2D
 
+
 var node_scene = preload("res://scenes/newnode.tscn")
 var bridge_scence =  preload("res://scenes/rainbow.tscn")
 var potion_scene = preload("res://scenes/potion.tscn")
@@ -14,7 +15,7 @@ var key_scene = preload("res://scenes/key.tscn")
 var max_depth = 4
 #var numOfNode = 0
 var curent_node
-var speed = 500
+var speed = 400
 var checkAnswer = []
 
 var node_pack = []
@@ -41,7 +42,7 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("up"):  # กด D
 		direction.y -= 1
-		used_mana(1)
+		
 		
 	if Input.is_action_pressed("down"):   # กด A
 		direction.y += 1
@@ -56,14 +57,18 @@ func _process(delta: float) -> void:
 
 	
 	player.position += direction * speed * delta
-	print(current_health)
+	
 
 
 func _ready() -> void:
 	
+	#popup_window.hide()
+	#close_button.connect("pressed", Callable(self, "_on_close_pressed"))
+	
+	show_mana.text =  str(current_health) + " / 100"
 	### set start 
 	var center_position = get_viewport_rect().size / 2  # จุดศูนย์กลางของหน้าจอ
-	var radius = 250  # ระยะห่างจากจุดศูนย์กลาง
+	var radius = 450  # ระยะห่างจากจุดศูนย์กลาง
 	 # เก็บตำแหน่งของโหนดทั้งหมด
 	
 	var start_node = node_scene.instantiate()
@@ -112,6 +117,8 @@ func _ready() -> void:
 		
 		
 		node.position = Vector2(x, y)  # ตั้งค่าตำแหน่งให้เป็นวงกลม
+		
+		
 		start_node.add_child(node)
 		node.add_myParent(start_node)
 		start_node.add_child_node(node)
@@ -176,8 +183,6 @@ func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , g
 	#if depth == max_depth - 1 :
 		#print
 	if depth >= max_depth:
-		
-		#print(parent_node)
 		match group:
 			1:
 				node_random_key1.append(parent_node)
@@ -191,7 +196,7 @@ func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , g
 		
 	
 	
-	var radius_node = 250 - (depth*20)  # ลดระยะห่างเมื่อระดับสูงขึ้น
+	var radius_node = 450 - (depth*50)  # ลดระยะห่างเมื่อระดับสูงขึ้น
 	#var radius_node = 250 
 	#var excluded_answers = []
 	var ex_answers = []
@@ -259,22 +264,28 @@ func create_bridge(start_node: Node2D, end_node: Node2D) -> void:
 
 func _on_area_2d_body_entered(node :Node2D,body: Node2D) -> void:	
 	if body == player:
-		checkAnswer = []
+		
+		var Answers = []
 		curent_node = node
+		
+		#print("position of node: ",curent_node.global_position)
+		#print("position of player: ",player.position)
 		node_show(node)
 		node.hide_equation()
 		
 		#print("Player เข้ามาในโหนด:", node.name )
 		#var pack_answer = []
 		if node.get_parent_node() != null :
-			checkAnswer.append(node.get_parent_node().get_answer())
+			Answers.append(node.get_parent_node().get_answer())
 			##print(pack_answer)
 			##pack_answer.append(random_equation(node.get_parent_node(),pack_answer))
 			#print("mom: ",node.get_parent_node().name)
 		if node.get_Arraychild_nodes() != null :
 			#var i = 1
 			for child in node.get_Arraychild_nodes() :
-				checkAnswer.append(child.get_answer())
+				Answers.append(child.get_answer())
+				
+				
 				##print(pack_answer)
 				##pack_answer.append(random_equation(child,pack_answer))
 				#print("son",str(i),": ",child.name)
@@ -291,40 +302,81 @@ func _on_area_2d_body_entered(node :Node2D,body: Node2D) -> void:
 func _on_area_2d_body_exited(node: Node2D,body: Node2D) -> void:
 	#print("ออกไปล้วจ๊าลาก่อน " ,node.name)
 	if body == player :
+		#checkAnswer = []
 		var pack_answer = []
 		if node.get_parent_node() != null :
 			pack_answer.append(node.get_parent_node().get_answer())
+			if node.get_parent_node().get_parent_node() != null :
+				pack_answer.append(node.get_parent_node().get_parent_node().get_answer())
+			if node.get_parent_node().get_Arraychild_nodes() != null :
+				for child in node.get_parent_node().get_Arraychild_nodes() :
+					pack_answer.append(child.get_answer())
 		if node.get_Arraychild_nodes() != null :
 			for child in node.get_Arraychild_nodes() :
-				pack_answer.append(child)
-			random_equation(node,pack_answer)
+				pack_answer.append(child.get_answer())
+				if child.get_Arraychild_nodes() != null :
+					for grand_child in child.get_Arraychild_nodes() :
+						pack_answer.append(grand_child.get_answer())
+		random_equation(node,pack_answer)
+		for i in pack_answer :
+			print(i)
+		#if node.get_answer() in pack_answer:
+			#pack_answer.erase(node.get_answer())
+			#checkAnswer = checkAnswer.filter(func(x): return x != node.get_answer())
+			
+		
+		
 	
 	
 	
+#func move_player_to_node(target_node: Node2D) -> void:
+	#
+	#var tween = create_tween()  # หยุด Tween ก่อนหน้า
+	##tween.tween_property(camera, "position", player.position, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	##tween.tween_property(player, "global_position",target_node.global_position, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	#player.global_position = target_node.global_position
+	#var tween1 = create_tween()
+	#
+	#tween1.tween_property(camera, "position", player.position, 1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	##camera.position = player.
+	##player.position = target_node.to_local(player.global_position)
+	#print(curent_node.global_position)
+	#print(target_node.global_position)
 	
 func move_player_to_node(target_node: Node2D) -> void:
-	player.position = target_node.global_position
+	# สร้าง Tween เพื่อย้ายผู้เล่นไปยังตำแหน่งของ target_node
+	var tween = create_tween() 
+	#camera.global_position = target_node.global_position  # ย้ายผู้เล่นไปยังตำแหน่งของโหนด
+	tween.tween_property(camera, "global_position", target_node.global_position, 0.5 ).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# สร้าง Tween สำหรับกล้องเพื่อให้กล้องตามผู้เล่น
+	var tween1 = create_tween()
+	tween1.tween_property(player, "global_position", target_node.global_position, 0.75 ).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
-	var tween = create_tween()  # หยุด Tween ก่อนหน้า
-	tween.tween_property(camera, "position", player.position, 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	#check_current_node()
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	input_answer.text = ""
-	#print("ans ",new_text)
 	
+	used_mana()
+	#print("ans ",new_text)
+	var cerect = false
 	var pack_answer = []
 	if curent_node.get_parent_node()!= null :
 		pack_answer.append(curent_node.get_parent_node().get_answer())
 		if new_text.strip_edges() == str(curent_node.get_parent_node().get_answer()):
 			move_player_to_node(curent_node.get_parent_node())
+			cerect = true
+			
 			
 	if curent_node.get_Arraychild_nodes() != null :
 		for child in curent_node.get_Arraychild_nodes() :
 				pack_answer.append(child.get_answer())
 				if new_text.strip_edges() == str(child.get_answer()) :
 					move_player_to_node(child)
+					cerect = true
 					
+	if not cerect :
+		used_mana()
 	#print(pack_answer)
 
 func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
@@ -337,8 +389,8 @@ func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
 	var new_answer: int
 	#nodeSetAnswer.show_equation()
 	while true :
-		num1 = randi_range(-9, 9)
-		num2 = randi_range(-9, 9)
+		num1 = randi_range(0, 9)
+		num2 = randi_range(0, 9)
 		random_operator = randi_range(0, 3)
 
 		match random_operator:
@@ -350,7 +402,7 @@ func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
 				new_answer = num1 * num2
 			3:
 				while num2 == 0 or num1 % num2 != 0:
-					num2 = randi_range(-9, 9)
+					num2 = randi_range(0, 9)
 					#if num2 < 0 :
 						#num2str = "(" + str(num2) +  ")"
 				new_answer = num1 / num2
@@ -436,16 +488,19 @@ func create_potion( num :int) :
 
 func body_entered_thedoor(body:Node2D):
 	print("เข้าประตู")
-
-var a = 0
-func body_get_key(body:Node2D,key:Node2D):
-	a += 1
-	print("ได้กุญแจ :",a)
+	var result_text = "Congratulations! You have completed this level!"
+	show_game_over_popup()
+		
 	
+@onready var show_key = $"cameraOfMain/24579420f6Eb1d2/key"
+var key_num = 0
+func body_get_key(body:Node2D,key:Node2D):
+	key_num += 1
+	show_key.text = "x " + str(key_num)
 	key.set_deferred("monitoring", false)
 	key.hide()
 	
-	if a == 3:
+	if key_num == 1:
 		door.show()
 		door.set_deferred("monitoring", true)
 		#camera.position = door.position
@@ -457,11 +512,57 @@ func body_get_key(body:Node2D,key:Node2D):
 		tween.tween_property(camera, "position", player.position, 1.5).set_ease(Tween.EASE_IN_OUT)
 
 @onready var mana = $cameraOfMain/satamina
+@onready var show_mana = $cameraOfMain/satamina/mana
 var max_mana = 100
 var current_health = 100
 
-func used_mana(amount):
-	current_health -= amount
-	current_health = max(0, current_health) # ห้ามต่ำกว่า 0
+
+func used_mana():
+	current_health -= 1
+	current_health = max(0, current_health) 
 	mana.value = current_health
+	show_mana.text =  str(current_health) + " / 100"
+	mana.visible = true
+
+
+
+@onready var popup_window = $Window
+@onready var result_label = $Window/Label
+@onready var close_button = $Window/Button
 	
+
+#func show_result(result_text: String):
+	#result_label.text = result_text
+	#popup_window.popup_centered()
+
+@onready var popup = $Endgame
+
+#func show_game_over_popup():
+	#popup.popup_centered(Vector2(720, 720)) 
+	#popup.position = (get_viewport_rect().size - popup.size) / 2
+	#popup.show()
+@onready var dialog = $AcceptDialog
+
+func show_game_over_popup():
+	dialog.dialog_text = "เกมจบแล้ว! คุณต้องการทำอะไรต่อ?"
+	dialog.add_button("เล่นต่อ", true, "retry")
+	dialog.add_button("กลับหน้าแรก", false, "home")
+	dialog.popup_centered()	
+func _on_close_pressed():
+	popup_window.hide()
+@onready var window = $Window
+
+#func show_game_over_popup():
+	#
+	#window.size = Vector2(400, 300)
+	#
+	#window.title = "Game Over"
+	#window.show()
+#
+#func _on_retry_button_pressed():
+	#print("เล่นต่อ")
+	#window.hide()
+#
+#func _on_home_button_pressed():
+	#print("กลับหน้าแรก")
+	#window.hide()

@@ -4,17 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://dvd0uc1niyy65" path="res://png-20250320T090118Z-001/png/Idle (1).png" id="2_f62eo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehkwi"]
-size = Vector2(93, 124)
+size = Vector2(125.5, 158)
 
 [node name="player" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_8twcd")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-13, -21)
-scale = Vector2(0.281501, 0.338752)
+position = Vector2(-38, -85)
+scale = Vector2(0.628576, 0.653989)
 texture = ExtResource("2_f62eo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 30)
+position = Vector2(-1, 44)
 shape = SubResource("RectangleShape2D_ehkwi")
