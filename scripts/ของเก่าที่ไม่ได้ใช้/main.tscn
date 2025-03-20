@@ -1,11 +1,11 @@
 [gd_scene load_steps=23 format=3 uid="uid://dgy7nd0e24q6y"]
 
-[ext_resource type="Script" path="res://scripts/nodescript/main.gd" id="1_aqx1i"]
-[ext_resource type="PackedScene" uid="uid://bql0f4pdji8ss" path="res://scripts/nodescript/player.tscn" id="2_4n4kg"]
-[ext_resource type="PackedScene" uid="uid://bqmctv5ywuvhr" path="res://scripts/nodescript/node.tscn" id="3_m4kih"]
+[ext_resource type="Script" path="res://scripts/ของเก่าที่ไม่ได้ใช้/main.gd" id="1_aqx1i"]
+[ext_resource type="PackedScene" uid="uid://bql0f4pdji8ss" path="res://scripts/ของเก่าที่ไม่ได้ใช้/player.tscn" id="2_4n4kg"]
+[ext_resource type="PackedScene" uid="uid://bqmctv5ywuvhr" path="res://scripts/ของเก่าที่ไม่ได้ใช้/node.tscn" id="3_m4kih"]
 [ext_resource type="Texture2D" uid="uid://dmtippcgwhgd5" path="res://24579420f6eb1d2.jpg" id="4_fcnm7"]
-[ext_resource type="Script" path="res://scripts/nodescript/camera_2d.gd" id="9_twhn5"]
-[ext_resource type="PackedScene" uid="uid://cxgwhyv3733l4" path="res://scripts/nodescript/key.tscn" id="22_3mcbc"]
+[ext_resource type="Script" path="res://scripts/ของเก่าที่ไม่ได้ใช้/camera_2d.gd" id="9_twhn5"]
+[ext_resource type="PackedScene" uid="uid://cxgwhyv3733l4" path="res://scripts/ของเก่าที่ไม่ได้ใช้/key.tscn" id="22_3mcbc"]
 
 [sub_resource type="GDScript" id="GDScript_ekua6"]
 script/source = "#extends Node2D

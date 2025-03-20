@@ -1,40 +1,97 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4ti4oqk7cjs6"]
+[gd_scene load_steps=10 format=3 uid="uid://c4ti4oqk7cjs6"]
 
 [ext_resource type="Script" path="res://scripts/newmain.gd" id="1_h5uav"]
 [ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="2_wyfh8"]
 [ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="3_u2li7"]
+[ext_resource type="Texture2D" uid="uid://dmtippcgwhgd5" path="res://24579420f6eb1d2.jpg" id="4_gxmvu"]
 [ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="4_v53l3"]
+[ext_resource type="PackedScene" uid="uid://c3ip5ycscjyi4" path="res://scenes/endgame.tscn" id="6_dale8"]
+
+[sub_resource type="SystemFont" id="SystemFont_se8ir"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_82y8j"]
+font = SubResource("SystemFont_se8ir")
+font_size = 200
+
+[sub_resource type="LabelSettings" id="LabelSettings_550vc"]
+font_size = 20
 
 [node name="Newmain" type="Node2D"]
-scale = Vector2(1.00546, 1.0025)
+position = Vector2(-51, -229)
 script = ExtResource("1_h5uav")
 
 [node name="door" parent="." instance=ExtResource("3_u2li7")]
 z_index = 1
-position = Vector2(584, 307)
+position = Vector2(1008, 650)
 scale = Vector2(0.663123, 0.563251)
 
 [node name="cameraOfMain" type="Camera2D" parent="."]
-position = Vector2(680, 456)
+position = Vector2(1012, 772)
 script = ExtResource("2_wyfh8")
 speed = 750.0
 
+[node name="24579420f6Eb1d2" type="Sprite2D" parent="cameraOfMain"]
+z_index = 2
+position = Vector2(-820, -436)
+scale = Vector2(0.251738, 0.240658)
+texture = ExtResource("4_gxmvu")
+
+[node name="key" type="Label" parent="cameraOfMain/24579420f6Eb1d2"]
+offset_left = 222.454
+offset_top = -157.9
+offset_right = 498.454
+offset_bottom = 115.1
+theme_override_font_sizes/font_size = 60
+text = "x 0"
+label_settings = SubResource("LabelSettings_82y8j")
+vertical_alignment = 1
+
 [node name="satamina" type="TextureProgressBar" parent="cameraOfMain"]
-offset_left = -544.0
-offset_top = 240.0
-offset_right = -343.0
-offset_bottom = 280.0
-tint_under = Color(0, 0.465579, 0.873606, 1)
+offset_left = -827.0
+offset_top = 379.0
+offset_right = -401.0
+offset_bottom = 419.0
+value = 100.0
+tint_under = Color(0.339227, 0.361494, 1, 1)
+tint_over = Color(0.716015, 0.391228, 0.511865, 1)
 tint_progress = Color(0, 0, 0, 1)
+
+[node name="mana" type="Label" parent="cameraOfMain/satamina"]
+layout_mode = 1
+offset_left = -72.0
+offset_top = 15.0
+offset_right = 1.0
+offset_bottom = 43.0
+text = "  / 100"
+label_settings = SubResource("LabelSettings_550vc")
+horizontal_alignment = 2
 
 [node name="LineEdit" type="LineEdit" parent="cameraOfMain"]
 z_index = 2
-offset_left = -275.0
-offset_top = 249.0
-offset_right = 236.0
-offset_bottom = 280.0
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = 373.0
+offset_right = 109.0
+offset_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 60
+placeholder_text = "input....."
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_v53l3")]
-position = Vector2(582, 331)
+position = Vector2(1010, 694)
+
+[node name="Window" type="Window" parent="."]
+position = Vector2i(0, 36)
+visible = false
+
+[node name="Endgame" parent="." instance=ExtResource("6_dale8")]
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+position = Vector2i(0, 36)
+visible = true
 
 [connection signal="text_submitted" from="cameraOfMain/LineEdit" to="." method="_on_line_edit_text_submitted"]

@@ -4,7 +4,7 @@ extends Node2D
 var child_nodes = []
 var myParent_node 
 #var my = preload("res://scenes/newnode.tscn")
-@onready var display_equation = $Label
+@onready var display_equation = $"รูปวงกลม/Label"
 var answer : int 
 var connect_to = []
 #var player = preload("res://scenes/player.tscn").instantiate()

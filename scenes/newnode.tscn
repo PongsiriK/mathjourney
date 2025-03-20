@@ -4,37 +4,43 @@
 [ext_resource type="Script" path="res://scripts/label.gd" id="3_dxqwl"]
 [ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="4_fu0p2"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_2o5tb"]
+font_size = 200
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_fmupq"]
 radius = 56.0089
 
-[sub_resource type="LabelSettings" id="LabelSettings_2o5tb"]
-font_size = 18
-font_color = Color(0, 0, 0, 1)
-
 [node name="Newnode" type="Node2D"]
-position = Vector2(195, 134)
 script = ExtResource("1_tfde3")
 
 [node name="รูปวงกลม" type="Sprite2D" parent="."]
-position = Vector2(9, 0)
-scale = Vector2(0.0981959, 0.122346)
+position = Vector2(7, -2)
+scale = Vector2(0.14984, 0.171181)
 texture = ExtResource("4_fu0p2")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_fmupq")
-
-[node name="Label" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Label" type="Label" parent="รูปวงกลม"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1240.26
+offset_top = -1163.57
+offset_right = -898.257
+offset_bottom = -890.569
 grow_horizontal = 2
 grow_vertical = 2
 text = "111"
 label_settings = SubResource("LabelSettings_2o5tb")
 horizontal_alignment = 1
 script = ExtResource("3_dxqwl")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.41099, 1.05142)
+shape = SubResource("CircleShape2D_fmupq")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlho7dr4q0tel"]
+
+[ext_resource type="Script" path="res://scripts/engame_display.gd" id="1_2yaso"]
+
+[node name="engame_display" type="AcceptDialog"]
+visible = true
+script = ExtResource("1_2yaso")
