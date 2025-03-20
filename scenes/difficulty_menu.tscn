@@ -1,0 +1,136 @@
+[gd_scene load_steps=20 format=3 uid="uid://c5yphpsnu3vxe"]
+
+[ext_resource type="Texture2D" uid="uid://dkb6dh726bbl5" path="res://assets/background_pic.png" id="1_nex63"]
+[ext_resource type="Texture2D" uid="uid://cy4r21vjl27u" path="res://assets/EASY.png" id="1_tyvtq"]
+[ext_resource type="Script" path="res://scripts/difficulty_menu.gd" id="1_umj6l"]
+[ext_resource type="Texture2D" uid="uid://b27o5dfd3fjbq" path="res://assets/Wooden Sign.png" id="2_bglre"]
+[ext_resource type="Texture2D" uid="uid://dnp1dfh3fe4xn" path="res://assets/EASY_hover.png" id="2_fgywi"]
+[ext_resource type="Texture2D" uid="uid://bawatpkwpuyj5" path="res://assets/MEDIUM.png" id="3_oq1n2"]
+[ext_resource type="Texture2D" uid="uid://7u3a6jcadjsl" path="res://assets/player/Slide (1).png" id="3_sys01"]
+[ext_resource type="Texture2D" uid="uid://xpbjp6wfnd8e" path="res://assets/MEDIUM_hover.png" id="4_c8d0e"]
+[ext_resource type="Texture2D" uid="uid://ty48de6gitvg" path="res://assets/player/Slide (2).png" id="4_mf651"]
+[ext_resource type="Texture2D" uid="uid://cbcg4e37skwls" path="res://assets/player/Slide (3).png" id="5_emanr"]
+[ext_resource type="Texture2D" uid="uid://dgbv1kd2h6wfx" path="res://assets/HARD.png" id="5_yysp5"]
+[ext_resource type="Texture2D" uid="uid://b6d5ryvhroi3g" path="res://assets/HARD_hard.png" id="6_riwx3"]
+[ext_resource type="Texture2D" uid="uid://1lohsdba4exf" path="res://assets/player/Slide (4).png" id="6_ryosm"]
+[ext_resource type="Texture2D" uid="uid://dbevllje5h0ln" path="res://assets/player/Slide (5).png" id="7_vtvgb"]
+[ext_resource type="Script" path="res://scripts/animated_sprite_2d.gd" id="8_r16rw"]
+[ext_resource type="Texture2D" uid="uid://dhyv5wdfig3yp" path="res://assets/back_button.png" id="15_e0fhd"]
+[ext_resource type="Texture2D" uid="uid://cjgrwmndrxp47" path="res://assets/back_button_hover.png" id="16_w8a70"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hc3lg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sys01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mf651")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_emanr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ryosm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vtvgb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_5g7un"]
+
+[node name="DifficultyMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_umj6l")
+
+[node name="BackgroundPic" type="Sprite2D" parent="."]
+position = Vector2(1356, 810)
+scale = Vector2(1.88893, 1.59831)
+texture = ExtResource("1_nex63")
+
+[node name="WoodenSign" type="Sprite2D" parent="."]
+position = Vector2(545, 154.572)
+scale = Vector2(1.34586, 1.38958)
+texture = ExtResource("2_bglre")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1717, 837)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_hc3lg")
+animation = &"idle"
+script = ExtResource("8_r16rw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -662.0
+offset_top = -37.0
+offset_right = 662.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Easy" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_tyvtq")
+texture_hover = ExtResource("2_fgywi")
+script = SubResource("GDScript_5g7un")
+
+[node name="Medium" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_oq1n2")
+texture_hover = ExtResource("4_c8d0e")
+
+[node name="Hard" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_yysp5")
+texture_hover = ExtResource("6_riwx3")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = -120.0
+offset_right = 1363.0
+offset_bottom = -23.0
+grow_vertical = 0
+theme_override_constants/separation = 130
+
+[node name="Back" type="TextureButton" parent="HBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("15_e0fhd")
+texture_hover = ExtResource("16_w8a70")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.42921, 1.49401)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(962, 542)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="pressed" from="HBoxContainer/Easy" to="." method="_on_easy_pressed"]
+[connection signal="pressed" from="HBoxContainer2/Back" to="." method="_on_back_pressed"]
