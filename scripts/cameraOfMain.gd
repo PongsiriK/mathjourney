@@ -6,7 +6,7 @@ extends Camera2D
 
 
 func _ready() -> void:
-	position = player.position
+	position = get_viewport_rect().size / 2
 	#box_answer.position = get_viewport_rect().size / 2
 	
 func _process(delta: float) -> void:

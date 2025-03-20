@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="4_v53l3"]
 
 [node name="Newmain" type="Node2D"]
+scale = Vector2(1.00546, 1.0025)
 script = ExtResource("1_h5uav")
 
 [node name="door" parent="." instance=ExtResource("3_u2li7")]
@@ -14,7 +15,7 @@ position = Vector2(584, 307)
 scale = Vector2(0.663123, 0.563251)
 
 [node name="cameraOfMain" type="Camera2D" parent="."]
-position = Vector2(582, 339)
+position = Vector2(680, 456)
 script = ExtResource("2_wyfh8")
 speed = 750.0
 

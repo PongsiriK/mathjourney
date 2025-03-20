@@ -1,0 +1,94 @@
+[gd_scene load_steps=17 format=3 uid="uid://dirfqwyfebis6"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_mrxum"]
+[ext_resource type="Texture2D" uid="uid://5hhc2g6336li" path="res://assets/START.png" id="1_vdeh7"]
+[ext_resource type="Texture2D" uid="uid://o226787px3oc" path="res://assets/START_hover.png" id="2_278ge"]
+[ext_resource type="Texture2D" uid="uid://ukbnwy0jekmp" path="res://assets/OPTION.png" id="3_yvsmi"]
+[ext_resource type="Texture2D" uid="uid://dkb6dh726bbl5" path="res://assets/background_pic.png" id="4_6c3bm"]
+[ext_resource type="Texture2D" uid="uid://b7qqawdwe8qub" path="res://assets/OPTION_hover.png" id="4_pkmxp"]
+[ext_resource type="Texture2D" uid="uid://pl4c7if00fh7" path="res://assets/QUIT.png" id="5_uf65f"]
+[ext_resource type="Texture2D" uid="uid://t5j1ymb4tatr" path="res://assets/QUIT_hover.png" id="6_p156b"]
+[ext_resource type="Texture2D" uid="uid://b27o5dfd3fjbq" path="res://assets/Wooden Sign.png" id="8_e4buh"]
+[ext_resource type="Texture2D" uid="uid://7u3a6jcadjsl" path="res://assets/player/Slide (1).png" id="9_g5mrx"]
+[ext_resource type="Texture2D" uid="uid://ty48de6gitvg" path="res://assets/player/Slide (2).png" id="10_g25ei"]
+[ext_resource type="Texture2D" uid="uid://cbcg4e37skwls" path="res://assets/player/Slide (3).png" id="11_n4wep"]
+[ext_resource type="Texture2D" uid="uid://1lohsdba4exf" path="res://assets/player/Slide (4).png" id="12_1m1ui"]
+[ext_resource type="Texture2D" uid="uid://dbevllje5h0ln" path="res://assets/player/Slide (5).png" id="13_fmrsv"]
+[ext_resource type="Script" path="res://scripts/animated_sprite_2d.gd" id="14_jb4id"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qr10"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_g5mrx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_g25ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_n4wep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1m1ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fmrsv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.00277)
+script = ExtResource("1_mrxum")
+
+[node name="BackgroundPic" type="Sprite2D" parent="."]
+position = Vector2(1356, 810)
+scale = Vector2(1.88893, 1.59831)
+texture = ExtResource("4_6c3bm")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+offset_left = 111.0
+offset_top = 447.76
+offset_right = 770.0
+offset_bottom = 1070.76
+theme_override_constants/separation = 100
+
+[node name="StartButton" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("1_vdeh7")
+texture_hover = ExtResource("2_278ge")
+
+[node name="OptionsButton" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("3_yvsmi")
+texture_hover = ExtResource("4_pkmxp")
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("5_uf65f")
+texture_hover = ExtResource("6_p156b")
+
+[node name="WoodenSign" type="Sprite2D" parent="."]
+position = Vector2(545, 154.572)
+scale = Vector2(1.34586, 1.38958)
+texture = ExtResource("8_e4buh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1516, 670.144)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_5qr10")
+animation = &"idle"
+frame_progress = 0.733466
+script = ExtResource("14_jb4id")
+
+[connection signal="pressed" from="VBoxContainer2/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/QuitButton" to="." method="_on_quit_button_pressed"]
