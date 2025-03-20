@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://hg0mf3fkg6uk"]
 
 [ext_resource type="Script" path="res://scripts/newnode.gd" id="1_tfde3"]
-[ext_resource type="Texture2D" uid="uid://cnv8drox2cl3o" path="res://รูปวงกลม.png" id="2_mfjmt"]
 [ext_resource type="Script" path="res://scripts/label.gd" id="3_dxqwl"]
+[ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="4_fu0p2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fmupq"]
 radius = 56.0089
@@ -16,8 +16,9 @@ position = Vector2(195, 134)
 script = ExtResource("1_tfde3")
 
 [node name="รูปวงกลม" type="Sprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_mfjmt")
+position = Vector2(9, 0)
+scale = Vector2(0.0981959, 0.122346)
+texture = ExtResource("4_fu0p2")
 
 [node name="Area2D" type="Area2D" parent="."]
 

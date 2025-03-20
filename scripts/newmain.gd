@@ -8,6 +8,8 @@ var key_scene = preload("res://scenes/key.tscn")
 @onready var input_answer = $cameraOfMain/LineEdit
 @onready var camera = $cameraOfMain
 @onready var player = $CharacterBody2D
+@onready var door = $door
+
 #var nodes = []
 var max_depth = 4
 #var numOfNode = 0
@@ -28,6 +30,7 @@ var node_random_key3 = []
 var key_node = []
 var potion_node = []
 
+var nodes_random = []
 
 
 
@@ -38,6 +41,7 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("up"):  # กด D
 		direction.y -= 1
+		used_mana(1)
 		
 	if Input.is_action_pressed("down"):   # กด A
 		direction.y += 1
@@ -52,7 +56,7 @@ func _process(delta: float) -> void:
 
 	
 	player.position += direction * speed * delta
-	
+	print(current_health)
 
 
 func _ready() -> void:
@@ -65,12 +69,14 @@ func _ready() -> void:
 	var start_node = node_scene.instantiate()
 	
 	
+	door.connect("entered_the_door",body_entered_thedoor)
+	
 	curent_node = start_node
 	
 	
 	start_node.name = "Startnode"
 	
-	print(start_node.name , "IsMade")
+	
 	
 	start_node.position = center_position
 	#nodes.append(node_mom)
@@ -96,7 +102,7 @@ func _ready() -> void:
 		node.connect("player_exited_area",_on_area_2d_body_exited)
 		
 		node.name = "node" + str(i+1)
-		print(node.name , " IsMade")
+		
 		var angle_degree = 30 + (i * 120)
 		var angle = deg_to_rad(30 + (i * 120))  # มุมแต่ละโหนด (0°, 120°, 240°)
 		
@@ -135,28 +141,43 @@ func _ready() -> void:
 	#set_pos_key(node_pack_no1)
 	#set_pos_key(node_pack_no2)
 	#set_pos_key(node_pack_no3)
+	print("before ",node_random_key1.size())
+	print(node_random_key1)
 	set_pos_key(node_random_key1)
+	print("after ",node_random_key1.size())
+	print(node_random_key1)
+	
 	set_pos_key(node_random_key2)
 	set_pos_key(node_random_key3)
 	
    # depth เริ่มที่ 1
 	#print("Node have ", numOfNode)
-	print(node_pack.size())
-	print(node_pack_no1.size())
-	print(node_pack_no2.size())
-	print(node_pack_no3.size())
-	print(node_pack_no1 ,"\n")
-	print(node_pack_no2,"\n")
-	print(node_pack_no3,"\n")
+	#print(node_pack.size())
+	#print(node_pack_no1.size())
+	#print(node_pack_no2.size())
+	#print(node_pack_no3.size())
+	#print(node_pack_no1 ,"\n")
+	#print(node_pack_no2,"\n")
+	#print(node_pack_no3,"\n")
 	
-	create_potion(8)
+	nodes_random = node_pack_no1 + node_pack_no2 + node_pack_no3
+	
+	print("before ",nodes_random.size())
+	print(nodes_random)
+	create_potion(5)
+	print("after ",nodes_random.size())
+	print(nodes_random)
+	print("===========================================================")
+	print(key_node)
+	print("===========================================================")
+	print(potion_node)
 # ฟังก์ชันสร้างโหนดลูก
 func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , group: int) -> void:
 	#if depth == max_depth - 1 :
 		#print
 	if depth >= max_depth:
 		
-		print(parent_node)
+		#print(parent_node)
 		match group:
 			1:
 				node_random_key1.append(parent_node)
@@ -243,7 +264,7 @@ func _on_area_2d_body_entered(node :Node2D,body: Node2D) -> void:
 		node_show(node)
 		node.hide_equation()
 		
-		print("Player เข้ามาในโหนด:", node.name )
+		#print("Player เข้ามาในโหนด:", node.name )
 		#var pack_answer = []
 		if node.get_parent_node() != null :
 			checkAnswer.append(node.get_parent_node().get_answer())
@@ -258,7 +279,7 @@ func _on_area_2d_body_entered(node :Node2D,body: Node2D) -> void:
 				##pack_answer.append(random_equation(child,pack_answer))
 				#print("son",str(i),": ",child.name)
 				#i += 1
-		print(checkAnswer)
+		#print(checkAnswer)
 		#if curent_node.get_answer() == null :
 			#print("no aws" )
 		#elif curent_node.get_answer() != null :
@@ -268,14 +289,15 @@ func _on_area_2d_body_entered(node :Node2D,body: Node2D) -> void:
 	
 # ฟังก์ชันเมื่อร่างกายออกจากพื้นที่
 func _on_area_2d_body_exited(node: Node2D,body: Node2D) -> void:
-	print("ออกไปล้วจ๊าลาก่อน " ,node.name)
-	var pack_answer = []
-	if node.get_parent_node() != null :
-		pack_answer.append(node.get_parent_node().get_answer())
-	if node.get_Arraychild_nodes() != null :
-		for child in node.get_Arraychild_nodes() :
-			pack_answer.append(child)
-		random_equation(node,pack_answer)
+	#print("ออกไปล้วจ๊าลาก่อน " ,node.name)
+	if body == player :
+		var pack_answer = []
+		if node.get_parent_node() != null :
+			pack_answer.append(node.get_parent_node().get_answer())
+		if node.get_Arraychild_nodes() != null :
+			for child in node.get_Arraychild_nodes() :
+				pack_answer.append(child)
+			random_equation(node,pack_answer)
 	
 	
 	
@@ -289,7 +311,7 @@ func move_player_to_node(target_node: Node2D) -> void:
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	input_answer.text = ""
-	print("ans ",new_text)
+	#print("ans ",new_text)
 	
 	var pack_answer = []
 	if curent_node.get_parent_node()!= null :
@@ -303,7 +325,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 				if new_text.strip_edges() == str(child.get_answer()) :
 					move_player_to_node(child)
 					
-	print(pack_answer)
+	#print(pack_answer)
 
 func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
 	var operator:Array = ["+","-","×","÷"]
@@ -373,31 +395,73 @@ func node_hide(node: Node2D):
 	
 func set_pos_key(group:Array) :
 	var key = key_scene.instantiate()
-	print("+++++++++++++++++++++++++++++")
+	key.connect("get_the_key",body_get_key)
+	#print("+++++++++++++++++++++++++++++")
 	var locationKey = randi_range(0, group.size() - 1 )
 	#var locationKey = 0
-	print(group[locationKey].global_position)
-	print("+++++++++++++++++++++++++++++")
+	#print(group[locationKey].global_position)
+	#print("+++++++++++++++++++++++++++++")
 	
-	key_node.append(group)
 	
-	print(key_node)
+	
+	#print(key_node)
 	
 	key.z_index = 0
 	group[locationKey].add_child(key)
+	key_node.append(group[locationKey])
+	print("gropB : " ,group.size())
+	group.pop_at(locationKey)
+	print("gropA : " ,group.size())
 	
 func create_potion( num :int) :
 
 	for i in range(num) :
 		
-		print("num :", i)
-		var random_num = randi_range(1, node_pack_no4.size() - 1 )
+		
+		#print("num :", i)
+		var random_num = randi_range(1, nodes_random.size() - 1 )
 		#var random_num =  node_pack.size() 
 		var posion = potion_scene.instantiate()
-		var random_node = node_pack_no4[random_num]
-		if not random_node in potion_node and not random_node in key_node:
-			random_node.add_child(posion)
-			potion_node.append(random_node)
+		var random_node = nodes_random[random_num]
+		
+		while random_node in key_node :
+			random_num = randi_range(1, nodes_random.size() - 1 )
+			random_node = nodes_random[random_num]
+		
+		random_node.add_child(posion)
+		potion_node.append(random_node)
+		nodes_random.pop_at(random_num)
 	
-	print(potion_node)
+	#print(potion_node)
+
+func body_entered_thedoor(body:Node2D):
+	print("เข้าประตู")
+
+var a = 0
+func body_get_key(body:Node2D,key:Node2D):
+	a += 1
+	print("ได้กุญแจ :",a)
+	
+	key.set_deferred("monitoring", false)
+	key.hide()
+	
+	if a == 3:
+		door.show()
+		door.set_deferred("monitoring", true)
+		#camera.position = door.position
+		var tween = create_tween()  # หยุด Tween ก่อนหน้า
+		tween.tween_property(camera, "position", door.position, 1.5).set_ease(Tween.EASE_IN_OUT)
+		# หน่วงเวลา 1 วินาทีที่ตำแหน่งประตู
+		tween.tween_interval(1.0)
+		# แพนกล้องกลับมาที่ผู้เล่น
+		tween.tween_property(camera, "position", player.position, 1.5).set_ease(Tween.EASE_IN_OUT)
+
+@onready var mana = $cameraOfMain/satamina
+var max_mana = 100
+var current_health = 100
+
+func used_mana(amount):
+	current_health -= amount
+	current_health = max(0, current_health) # ห้ามต่ำกว่า 0
+	mana.value = current_health
 	
