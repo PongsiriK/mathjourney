@@ -6,7 +6,7 @@ extends CharacterBody2D
 func _ready() -> void:
 	position = get_viewport_rect().size / 2
 	# กำหนดให้ภาพเริ่มต้นอยู่นอกจอด้านบน
-	
+	animation.play("stand")
 	
 	#animation.get_animation("jump").loop = false
 	
