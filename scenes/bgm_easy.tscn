@@ -1,7 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfotflrk016kr"]
+[gd_scene load_steps=2 format=3 uid="uid://v4q21xrvbmj"]
 
 [ext_resource type="AudioStream" uid="uid://b8iuaycyuyhnp" path="res://assets/bgm_easy.mp3" id="1_ly4na"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_ly4na")
 autoplay = true
+bus = &"music"

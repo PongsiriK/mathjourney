@@ -138,6 +138,7 @@ position = Vector2(962, 542)
 
 [node name="Transition_SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_1gmxe")
+bus = &"sfx"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -193,6 +194,8 @@ texture = ExtResource("21_wux2w")
 [connection signal="pressed" from="HBoxContainer/Easy" to="." method="_on_easy_pressed"]
 [connection signal="mouse_entered" from="HBoxContainer/Medium" to="." method="_on_medium_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/Medium" to="." method="_on_medium_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/Medium" to="." method="_on_medium_pressed"]
 [connection signal="mouse_entered" from="HBoxContainer/Hard" to="." method="_on_hard_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/Hard" to="." method="_on_hard_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/Hard" to="." method="_on_hard_pressed"]
 [connection signal="pressed" from="HBoxContainer2/Back" to="." method="_on_back_pressed"]

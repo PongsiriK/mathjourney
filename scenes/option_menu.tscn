@@ -85,4 +85,5 @@ texture_normal = ExtResource("1_puqve")
 texture_hover = ExtResource("2_ae07b")
 
 [connection signal="pressed" from="VBoxContainer2/GraphicButton" to="." method="_on_graphic_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AudioButton" to="." method="_on_audio_button_pressed"]
 [connection signal="pressed" from="HBoxContainer2/Back" to="." method="_on_back_pressed"]

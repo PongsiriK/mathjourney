@@ -19,10 +19,6 @@ func _ready() -> void:
 	hard_description_image = $HBoxContainer5/Hard_describe
 	hard_description_image.visible = false  # ซ่อนภาพเมื่อเริ่มต้น
 
-func _on_easy_pressed():
-	print("✅ ปุ่ม EASY ถูกกด!") 
-	play_zoom_animation()
-
 func play_zoom_animation():
 	print("🎬 เริ่มซูมไปที่ตัวละคร...")
 
@@ -45,7 +41,6 @@ func play_zoom_animation():
 	tween.tween_property(color_rect, "modulate:a", 1.0, 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	BGM.fade_out_and_change_bgm(BGM.bgm_gameplay)
 	await tween.finished
-	get_tree().change_scene_to_file("res://scenes/newmain.tscn")
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
@@ -73,3 +68,18 @@ func _on_hard_mouse_entered() -> void:
 
 func _on_hard_mouse_exited() -> void:
 	hard_description_image.visible = false
+
+func _on_easy_pressed():
+	print("✅ You choose EASY mode") 
+	await play_zoom_animation()
+	get_tree().change_scene_to_file("res://scenes/playgame_easy.tscn")
+	
+func _on_medium_pressed() -> void:
+	print("✅ You choose MEDIUM mode") 
+	await play_zoom_animation()
+	get_tree().change_scene_to_file("res://scenes/newmain.tscn")
+	
+func _on_hard_pressed() -> void:
+	print("✅ You choose HARD mode") 
+	await play_zoom_animation()
+	get_tree().change_scene_to_file("res://scenes/playgame_hard.tscn")
