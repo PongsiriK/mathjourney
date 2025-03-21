@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bixyw06scjfyl"]
+
+[ext_resource type="Texture2D" uid="uid://d75tc60ga4hn" path="res://star-night-sky-astronomy-universe-preview.jpg" id="1_1ff5p"]
+[ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="2_k2vca"]
+[ext_resource type="Script" path="res://scenes/mek.gd" id="3_d10yp"]
+
+[node name="blackg_h" type="ParallaxBackground"]
+
+[node name="1649191017104023p3104" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(25.5, 30.125)
+scale = Vector2(1.54808, 1.87577)
+texture = ExtResource("1_1ff5p")
+
+[node name="07r58piCzC736eVsct0qfPic2018" type="Sprite2D" parent="."]
+position = Vector2(-1655, -38)
+scale = Vector2(0.886, 0.893)
+texture = ExtResource("2_k2vca")
+script = ExtResource("3_d10yp")

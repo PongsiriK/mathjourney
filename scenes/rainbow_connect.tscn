@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhd1s013ac3sq"]
+
+[ext_resource type="Texture2D" uid="uid://c2eqakk3ft6ng" path="res://assets/png-transparent-rainbow-color-cartoon-sky-painting-line 2.png" id="1_4gq6m"]
+[ext_resource type="Script" path="res://scripts/rainbow_connect.gd" id="1_4ip4k"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_4ip4k")
+
+[node name="Png-transparent-rainbow-color-cartoon-sky-painting-line2" type="Sprite2D" parent="."]
+position = Vector2(-16.921, -36.3814)
+rotation = 0.289186
+scale = Vector2(1.29451, 0.851056)
+texture = ExtResource("1_4gq6m")
+flip_v = true

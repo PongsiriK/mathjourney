@@ -94,13 +94,6 @@ var r = 350
 
 func _ready() -> void:
 	
-	
-	
-	
-	
-	
-	
-	
 	key_1.modulate.a = 0.5
 	key_2.modulate.a = 0.5
 	key_3.modulate.a = 0.5
@@ -467,8 +460,8 @@ func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
 	var new_answer: int
 	#nodeSetAnswer.show_equation()
 	while true :
-		num1 = randi_range(0, 9)
-		num2 = randi_range(0, 9)
+		num1 = randi_range(0, 99)
+		num2 = randi_range(0, 99)
 		random_operator = randi_range(0, 3)
 
 		match random_operator:

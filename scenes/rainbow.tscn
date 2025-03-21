@@ -1,13 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhxvmw37kv54h"]
+[gd_scene load_steps=4 format=3 uid="uid://dhxvmw37kv54h"]
 
 [ext_resource type="Script" path="res://scripts/rainbow.gd" id="1_ms0oc"]
 [ext_resource type="Texture2D" uid="uid://pgexl0poc6y" path="res://pngtree-vector-cartoon-color-rainbow-png-image_7057609.png" id="2_ukihq"]
+[ext_resource type="Texture2D" uid="uid://c2eqakk3ft6ng" path="res://assets/png-transparent-rainbow-color-cartoon-sky-painting-line 2.png" id="2_xwh52"]
 
 [node name="rainbow" type="Node2D"]
 scale = Vector2(0.664205, 0.101595)
 script = ExtResource("1_ms0oc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 3.14159
+position = Vector2(-345.202, 46.9525)
+rotation = 3.03704
 scale = Vector2(0.660727, 1.88992)
 texture = ExtResource("2_ukihq")
+offset = Vector2(-527.021, 5.64604)
+
+[node name="Png-transparent-rainbow-color-cartoon-sky-painting-line2" type="Sprite2D" parent="."]
+position = Vector2(-27.3872, -103.583)
+rotation = -0.286501
+scale = Vector2(-2.93033, 6.96371)
+texture = ExtResource("2_xwh52")
+offset = Vector2(20, 20)
+
+[node name="Png-transparent-rainbow-color-cartoon-sky-painting-line3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-34.6279, 118.116)
+rotation = 2.57441
+scale = Vector2(2.01781, 2.61977)
+texture = ExtResource("2_xwh52")

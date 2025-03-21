@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://xw6er04nvef5"]
+
+[ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="1_iud4k"]
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_r4n6y"]
+[ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="2_1o4hc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5p48g"]
+font = ExtResource("2_1o4hc")
+font_size = 150
+font_color = Color(0, 0, 0, 1)
+
+[node name="gameover" type="Node2D"]
+position = Vector2(1003, 486)
+scale = Vector2(1.25, 1.25)
+script = ExtResource("1_r4n6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.80725, 1.08075)
+texture = ExtResource("1_iud4k")
+
+[node name="again" type="Button" parent="."]
+offset_left = -435.0
+offset_top = 336.0
+offset_right = -157.0
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("2_1o4hc")
+theme_override_font_sizes/font_size = 50
+text = "again"
+
+[node name="back" type="Button" parent="."]
+offset_left = 79.0
+offset_top = 335.0
+offset_right = 357.0
+offset_bottom = 453.0
+theme_override_fonts/font = ExtResource("2_1o4hc")
+theme_override_font_sizes/font_size = 50
+text = "BACK"
+
+[node name="Label" type="Label" parent="."]
+offset_left = -419.0
+offset_top = -201.0
+offset_right = 406.0
+offset_bottom = 11.0
+text = "score :"
+label_settings = SubResource("LabelSettings_5p48g")
+horizontal_alignment = 1
+
+[node name="score" type="Label" parent="."]
+offset_left = -428.0
+offset_top = 27.0
+offset_right = 397.0
+offset_bottom = 239.0
+text = "111"
+label_settings = SubResource("LabelSettings_5p48g")
+horizontal_alignment = 1

@@ -94,13 +94,6 @@ var r = 350
 
 func _ready() -> void:
 	
-	
-	
-	
-	
-	
-	
-	
 	key_1.modulate.a = 0.5
 	key_2.modulate.a = 0.5
 	key_3.modulate.a = 0.5
@@ -458,7 +451,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 	#print(pack_answer)
 
 func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
-	var operator:Array = ["+","-","×","÷"]
+	var operator:Array = ["+","-"]
 	var num1: int
 	var num1str : String
 	var num2: int
@@ -469,21 +462,21 @@ func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
 	while true :
 		num1 = randi_range(0, 9)
 		num2 = randi_range(0, 9)
-		random_operator = randi_range(0, 3)
+		random_operator = randi_range(0, 1)
 
 		match random_operator:
 			0:
 				new_answer = num1 + num2
 			1:
 				new_answer = num1 - num2
-			2:
-				new_answer = num1 * num2
-			3:
-				while num2 == 0 or num1 % num2 != 0:
-					num2 = randi_range(0, 9)
+			#2:
+				#new_answer = num1 * num2
+			#3:
+				#while num2 == 0 or num1 % num2 != 0:
+					#num2 = randi_range(0, 9)
 					#if num2 < 0 :
 						#num2str = "(" + str(num2) +  ")"
-				new_answer = num1 / num2
+				#new_answer = num1 / num2
 			
 		if num1 < 0 :
 			num1str = "(" + str(num1) +  ")"
@@ -539,9 +532,9 @@ func set_pos_key(group:Array) :
 	key.z_index = 0
 	group[locationKey].add_child(key)
 	key_node.append(group[locationKey])
-	print("gropB : " ,group.size())
+
 	group.pop_at(locationKey)
-	print("gropA : " ,group.size())
+	
 	
 func create_potion( num :int) :
 
