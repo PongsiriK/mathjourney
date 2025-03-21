@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cndf3084m0itb"]
+
+[ext_resource type="AudioStream" uid="uid://b4m3gw44uid8f" path="res://assets/SFX/Click_sound.mp3" id="1_p7l4s"]
+
+[sub_resource type="GDScript" id="GDScript_oo5s1"]
+script/source = "extends AudioStreamPlayer
+
+@onready var click_sound = $ClickSoundPlayer
+
+func _ready():
+	# ✅ ตรวจจับการกดปุ่มทุกปุ่มในเกม
+	get_tree().root.connect(\"gui_input\", _on_gui_input)
+
+func _on_gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		click_sound.play()
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_p7l4s")
+script = SubResource("GDScript_oo5s1")

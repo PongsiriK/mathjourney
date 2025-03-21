@@ -6,10 +6,13 @@ var bgm_main_menu: AudioStream = preload("res://assets/bgm_main_menu.mp3")
 var bgm_gameplay: AudioStream = preload("res://assets/bgm_easy.mp3")
 
 func _ready():
-	add_child(bgm_player)
+	add_child(bgm_player)  # ✅ ต้องเพิ่มก่อนเล่น
 	bgm_player.stream = bgm_main_menu
-	bgm_player.volume_db = -10  # เสียงเริ่มต้น
+	bgm_player.bus = "music"  # ✅ กำหนด bus ก่อนเล่น
+	bgm_player.volume_db = -10  # ✅ ตั้งค่าเสียงเริ่มต้น
 	bgm_player.play()
+	
+	print(bgm_player.bus)  # ✅ เช็คว่า bus ถูกต้องหรือไม่
 
 # ✅ ฟังก์ชันลดเสียงเพลงลงก่อนเปลี่ยนเพลง
 func fade_out_and_change_bgm(new_bgm: AudioStream):
