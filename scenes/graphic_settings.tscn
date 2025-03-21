@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://5ur5lobspi2t"]
+
+[ext_resource type="Script" path="res://scripts/graphic_settings.gd" id="1_iayf0"]
+[ext_resource type="Texture2D" uid="uid://dkb6dh726bbl5" path="res://assets/background_pic.png" id="2_cq6wy"]
+[ext_resource type="Texture2D" uid="uid://b27o5dfd3fjbq" path="res://assets/Wooden Sign.png" id="3_b3xns"]
+[ext_resource type="Texture2D" uid="uid://cf3437lf18h0f" path="res://assets/Rectangle 2.png" id="8_rkepw"]
+[ext_resource type="Texture2D" uid="uid://djiblcf7f7ogo" path="res://assets/Graphic Setting.png" id="10_i5aj3"]
+[ext_resource type="Texture2D" uid="uid://dcnol3cgymnyd" path="res://assets/Graphic Setting_hover.png" id="11_fusu3"]
+[ext_resource type="Texture2D" uid="uid://hvgep1jqybdy" path="res://assets/Audio Setting.png" id="12_nqao4"]
+[ext_resource type="Texture2D" uid="uid://bbqxr2spcnmdo" path="res://assets/Audio Setting_hover.png" id="13_yuukk"]
+[ext_resource type="Texture2D" uid="uid://dhyv5wdfig3yp" path="res://assets/back_button.png" id="14_onh1f"]
+[ext_resource type="Texture2D" uid="uid://cjgrwmndrxp47" path="res://assets/back_button_hover.png" id="15_k67af"]
+
+[node name="GraphicSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iayf0")
+
+[node name="BackgroundPic" type="Sprite2D" parent="."]
+position = Vector2(1356, 810)
+scale = Vector2(1.88893, 1.59831)
+texture = ExtResource("2_cq6wy")
+
+[node name="WoodenSign" type="Sprite2D" parent="."]
+position = Vector2(545, 154.572)
+scale = Vector2(1.34586, 1.38958)
+texture = ExtResource("3_b3xns")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.05
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 93.0
+offset_right = 547.0
+offset_bottom = 157.0
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="GraphicButton" type="TextureButton" parent="VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("10_i5aj3")
+texture_hover = ExtResource("11_fusu3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.085
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -89.0
+offset_right = 476.8
+offset_bottom = -25.0
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="AudioButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("12_nqao4")
+texture_hover = ExtResource("13_yuukk")
+
+[node name="Rectangle2" type="Sprite2D" parent="."]
+position = Vector2(1310, 707)
+texture = ExtResource("8_rkepw")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = -120.0
+offset_right = 1363.0
+offset_bottom = -23.0
+grow_vertical = 0
+theme_override_constants/separation = 130
+
+[node name="Back" type="TextureButton" parent="HBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("14_onh1f")
+texture_hover = ExtResource("15_k67af")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 963.0
+offset_top = 465.0
+offset_right = 1003.0
+offset_bottom = 505.0
+
+[connection signal="pressed" from="VBoxContainer/AudioButton" to="." method="_on_audio_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/Back" to="." method="_on_back_pressed"]

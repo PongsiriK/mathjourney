@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cbdhotiwwy1ve"]
+[gd_scene load_steps=24 format=3 uid="uid://c5yphpsnu3vxe"]
 
 [ext_resource type="Texture2D" uid="uid://dkb6dh726bbl5" path="res://assets/background_pic.png" id="1_nex63"]
 [ext_resource type="Texture2D" uid="uid://cy4r21vjl27u" path="res://assets/EASY.png" id="1_tyvtq"]
@@ -17,6 +17,10 @@
 [ext_resource type="Script" path="res://scripts/animated_sprite_2d.gd" id="8_r16rw"]
 [ext_resource type="Texture2D" uid="uid://dhyv5wdfig3yp" path="res://assets/back_button.png" id="15_e0fhd"]
 [ext_resource type="Texture2D" uid="uid://cjgrwmndrxp47" path="res://assets/back_button_hover.png" id="16_w8a70"]
+[ext_resource type="AudioStream" uid="uid://cdtg88v76jeme" path="res://assets/Transition - Sound Effects.mp3" id="18_1gmxe"]
+[ext_resource type="Texture2D" uid="uid://cvaundq624mue" path="res://assets/Easy_describe.png" id="19_v6xy0"]
+[ext_resource type="Texture2D" uid="uid://dnowsg8oadpof" path="res://assets/Medium_describe.png" id="20_t8vg5"]
+[ext_resource type="Texture2D" uid="uid://cnwckdlp00cvn" path="res://assets/Hard_describe.png" id="21_wux2w"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hc3lg"]
 animations = [{
@@ -111,6 +115,7 @@ offset_top = -120.0
 offset_right = 1363.0
 offset_bottom = -23.0
 grow_vertical = 0
+scale = Vector2(1.00297, 1)
 theme_override_constants/separation = 130
 
 [node name="Back" type="TextureButton" parent="HBoxContainer2"]
@@ -131,6 +136,63 @@ scale = Vector2(1.42921, 1.49401)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(962, 542)
 
+[node name="Transition_SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_1gmxe")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 160.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Easy_describe" type="Sprite2D" parent="HBoxContainer3"]
+visible = false
+texture = ExtResource("19_v6xy0")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 160.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Medium_describe" type="Sprite2D" parent="HBoxContainer4"]
+visible = false
+texture = ExtResource("20_t8vg5")
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 160.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hard_describe" type="Sprite2D" parent="HBoxContainer5"]
+visible = false
+texture = ExtResource("21_wux2w")
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="mouse_entered" from="HBoxContainer/Easy" to="." method="_on_easy_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Easy" to="." method="_on_easy_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/Easy" to="." method="_on_easy_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/Medium" to="." method="_on_medium_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Medium" to="." method="_on_medium_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/Hard" to="." method="_on_hard_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Hard" to="." method="_on_hard_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer2/Back" to="." method="_on_back_pressed"]
