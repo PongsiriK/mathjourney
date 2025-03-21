@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Bgm="*res://scenes/bgm.tscn"
+BGM="*res://scripts/bgm.gd"
 
 [display]
 
