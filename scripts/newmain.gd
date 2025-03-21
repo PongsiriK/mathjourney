@@ -94,12 +94,7 @@ var r = 350
 
 func _ready() -> void:
 	
-	
-	
-	
-	
-	
-	
+
 	
 	key_1.modulate.a = 0.5
 	key_2.modulate.a = 0.5

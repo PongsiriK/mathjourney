@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvdtrxkcriqal"]
 
 [ext_resource type="Script" path="res://scripts/key.gd" id="1_lt6h8"]
-[ext_resource type="Texture2D" uid="uid://cinss5d80o73b" path="res://assets/1.png" id="2_dxyiw"]
+[ext_resource type="Texture2D" uid="uid://c3m8l33fc3iaf" path="res://assets/Group 27.png" id="2_sofrp"]
 [ext_resource type="Script" path="res://scripts/effect_key/key_eff.gd" id="3_nvdsg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u5j6"]
@@ -13,7 +13,7 @@ script = ExtResource("1_lt6h8")
 [node name="24579420f6Eb1d2" type="Sprite2D" parent="."]
 position = Vector2(0, -85)
 scale = Vector2(0.7625, 0.725)
-texture = ExtResource("2_dxyiw")
+texture = ExtResource("2_sofrp")
 script = ExtResource("3_nvdsg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

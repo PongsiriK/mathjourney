@@ -53,3 +53,6 @@ offset_bottom = 239.0
 text = "111"
 label_settings = SubResource("LabelSettings_5p48g")
 horizontal_alignment = 1
+
+[connection signal="pressed" from="again" to="." method="_on_again_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

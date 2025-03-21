@@ -13,6 +13,7 @@ var key_scene = preload("res://scenes/key.tscn")
 @onready var player = $CharacterBody2D
 @onready var door = $door
 
+var pause = false
 #var nodes = []
 var max_depth = 4
 #var numOfNode = 0
@@ -36,37 +37,58 @@ var potion_node = []
 var nodes_random = []
 
 
-var time_elapsed: float = 0.0
-var is_running: bool = false
+var time_elapsed: float = 0.0  # ตัวแปรเก็บเวลา
+var minutes: int = 0  # เก็บจำนวน minutes
+var seconds: int = 0  # เก็บจำนวน seconds
+var milliseconds: int = 0  # เก็บจำนวน milliseconds
+
+var is_timer_running: bool = false
 @onready var time = $cameraOfMain/time
 
 var start = false
 
-func start_timer():
-	is_running = true
+func stop_timer() -> void:
+	is_timer_running = false  # หยุดการจับเวลา
 
-func stop_timer():
-	is_running = false
-
-func reset_timer():
-	is_running = false
-	time_elapsed = 0.0
-	time.text = "Time: 0.00"
-
+# ฟังก์ชันสำหรับเริ่มนับต่อ
+func start_timer() -> void:
+	is_timer_running = true
+#func start_timer():
+	#is_running = true
+#
+#func stop_timer():
+	#is_running = false
+#
+#func reset_timer():
+	#is_running = false
+	#time_elapsed = 0.0
+	#time.text = "Time: 0.00"
+var minutes_text = "00"
+var seconds_text = "00"
+var milliseconds_text = "00"
 @onready var score_show = $cameraOfMain/score
 var score = 0 
 
 func add_score(num:int):
 	score += num
-	score_show.text = "score: " + str(score)
+	score_show.text = str(score)
 #func _process(delta: float) -> void:
 func _process(delta: float) -> void:
 	
-	
-	if is_running:
+	if is_timer_running:
 		time_elapsed += delta
-		time.text = "Time: %.2f" % time_elapsed
+		# คำนวณเวลา
+		minutes = int(time_elapsed) / 60  # หามินาที
+		seconds = int(time_elapsed) % 60  # หาวินาที
+		milliseconds = int(time_elapsed * 100) % 100
+		
+		minutes_text = "%02d" % int(minutes)
+		seconds_text = "%02d" % int(seconds)
+		milliseconds_text = "%02d" % int(milliseconds)
 
+# รวมข้อความทั้งหมด
+		time.text = minutes_text + ":" + seconds_text + ":" + milliseconds_text # หาค่ามิลลิวินาที
+# แสดงผล
 
 ################################################################################################################	
 	var direction = Vector2.ZERO
@@ -94,12 +116,14 @@ var r = 350
 
 func _ready() -> void:
 	
+	pause_scene.connect("resume_game",unpause)
+	time.text = minutes_text + ":" + seconds_text + ":" + milliseconds_text
 	key_1.modulate.a = 0.5
 	key_2.modulate.a = 0.5
 	key_3.modulate.a = 0.5
 	#show_key.modulate.a = 0.5
-	score_show.text = "score: " + str(score)
-	time.text = "Time: %.2f" % time_elapsed
+	score_show.text = str(score)
+	
 	#popup_window.hide()
 	#close_button.connect("pressed", Callable(self, "_on_close_pressed"))
 	mana.value = current_mana
@@ -427,6 +451,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 	input_answer.text = ""
 	if not start :
 		start_timer()
+		start = true
 	used_mana()
 	#print("ans ",new_text)
 	var corect = false
@@ -559,14 +584,31 @@ func create_potion( num :int) :
 	#print(potion_node)
 
 func body_entered_thedoor(body:Node2D):
+	time_elapsed
 	var result_text = "Congratulations! You have completed this level!"
-	show_game_over_popup()
+	
+	var min_time = 30
+	var max_time = 600
+	var max_score = 5000
 	stop_timer()
-		
+# คำนวณคะแนน
+	score = calculate_score(time_elapsed, max_time, min_time, max_score)
+	
+	show_game_over_popup()
+	
+
 	
 #@onready var show_key = $"cameraOfMain/24579420f6Eb1d2/key"
-var key_num = 0
 
+
+func calculate_score(time_elapsed: float, max_time: float, min_time: float, max_score: int) -> int:
+	# คำนวณเวลาที่ใช้ในช่วงเวลาที่สามารถได้คะแนน
+	var normalized_time = clamp(time_elapsed, min_time, max_time) # จำกัดให้เวลาอยู่ในช่วงที่ตั้งไว้
+	var score = max_score - int((normalized_time - min_time) / (max_time - min_time) * max_score)
+
+	return score
+
+var key_num = 0
 func body_get_key(body:Node2D,key:Node2D):
 	
 	if body == player :
@@ -578,17 +620,32 @@ func body_get_key(body:Node2D,key:Node2D):
 		add_score(500)
 		show_num_key()
 		player.yeah()
-		if key_num == 1:
-			door.show()
-			door.set_deferred("monitoring", true)
+		if key_num == 3:
+			camera.pause_set(true)
 			#camera.position = door.position
 			var tween = create_tween()  # หยุด Tween ก่อนหน้า
-			tween.tween_property(camera, "position", door.position, 1.5).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(camera, "position", door.position, 1).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_interval(2.0)
+			tween.tween_property(camera, "position", player.position, 1).set_ease(Tween.EASE_IN_OUT)
 			# หน่วงเวลา 1 วินาทีที่ตำแหน่งประตู
-			tween.tween_interval(1.0)
+			
+			
+			await wait(1)
+			door.show()
+			door.open()
+			door.set_deferred("monitoring", true)
+			
+			await wait(2.5)
+			camera.pause_set(false)
+			
+			
+			
 			# แพนกล้องกลับมาที่ผู้เล่น
-			tween.tween_property(camera, "position", player.position, 1.5).set_ease(Tween.EASE_IN_OUT)
+			
 
+func wait(seconds: float):
+	await get_tree().create_timer(seconds).timeout
+	
 @onready var key_1 = $cameraOfMain/key1
 @onready var key_2 = $cameraOfMain/key2
 @onready var key_3 = $cameraOfMain/key3
@@ -635,31 +692,46 @@ func used_mana():
 
 
 
-@onready var popup_window = $Window
-@onready var result_label = $Window/Label
-@onready var close_button = $Window/Button
+#@onready var popup_window = $Window
+#@onready var result_label = $Window/Label
+#@onready var close_button = $Window/Button
 	
 
 #func show_result(result_text: String):
 	#result_label.text = result_text
 	#popup_window.popup_centered()
 
-@onready var popup = $Endgame
+#@onready var popup = $Endgame
 
 #func show_game_over_popup():
 	#popup.popup_centered(Vector2(720, 720)) 
 	#popup.position = (get_viewport_rect().size - popup.size) / 2
 	#popup.show()
-@onready var dialog = $AcceptDialog
+#@onready var dialog = $AcceptDialog
 
 @onready var game_over = $gameover
 func show_game_over_popup():
-	game_over.show()
-	game_over.z_index = 11
-	camera.position = get_viewport_rect().size / 2
+	game_over.allow_all()
+	camera.global_position = game_over.global_position
 	game_over.result_score(score)
+	camera.pause_set(true)
 	for element in camera.get_children():
 		element.visible = false
+	pause_but.disabled = true
+	input_answer.editable = true
+		
+@onready var pause_but = $cameraOfMain/pause
+@onready var pause_scene = $pause_scene
+func pause_game () :
+	pause_scene.allow_all()
+	pause = true
+	pause_scene.global_position = camera.global_position
+	stop_timer()
+	camera.pause_set(true)
+	input_answer.hide()
+	input_answer.editable = false
+	pause_but.hide()
+	
 #func show_game_over_popup():
 	#
 	#window.size = Vector2(400, 300)
@@ -674,3 +746,15 @@ func show_game_over_popup():
 #func _on_home_button_pressed():
 	#print("กลับหน้าแรก")
 	#window.hide()
+
+func unpause():
+	pause_scene.dis_all()
+	pause = false
+	start_timer()
+	camera.pause_set(false)
+	input_answer.show()
+	input_answer.editable = true
+	pause_but.show()
+	
+func _on_pause_pressed() -> void:
+	pause_game()

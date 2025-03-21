@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgipt68f77bvt"]
+[gd_scene load_steps=18 format=3 uid="uid://bgipt68f77bvt"]
 
 [ext_resource type="Script" path="res://scripts/playgame_easy.gd" id="1_68pqk"]
 [ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="2_q4xn7"]
 [ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="3_pvrn7"]
-[ext_resource type="PackedScene" uid="uid://c3ip5ycscjyi4" path="res://scenes/endgame.tscn" id="4_fqe4k"]
-[ext_resource type="PackedScene" uid="uid://b3tycudeixng1" path="res://scenes/background.tscn" id="5_1hkvr"]
 [ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="6_8myr3"]
 [ext_resource type="Texture2D" uid="uid://cinss5d80o73b" path="res://assets/1.png" id="7_gxjtr"]
 [ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="8_i1fyi"]
+[ext_resource type="Texture2D" uid="uid://diixifaob0yhc" path="res://assets/pngegg (1).png" id="9_2i8f3"]
 [ext_resource type="PackedScene" uid="uid://xw6er04nvef5" path="res://scenes/gameover.tscn" id="9_jtwel"]
+[ext_resource type="Texture2D" uid="uid://vr26qc841rsw" path="res://assets/bg-20250321T181657Z-001/bg/Easy_bg.png" id="10_dfc8d"]
+[ext_resource type="PackedScene" uid="uid://dskl3cm1c1t5c" path="res://scenes/pause_scene.tscn" id="11_prvbw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy4he"]
 bg_color = Color(0.668766, 0.561128, 0.655876, 1)
@@ -34,9 +35,19 @@ font = ExtResource("8_i1fyi")
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ufh80"]
+font = ExtResource("8_i1fyi")
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_7fg22"]
 font = ExtResource("8_i1fyi")
-font_size = 100
+font_size = 150
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tdhcg"]
+font = ExtResource("8_i1fyi")
+font_size = 50
 font_color = Color(0, 0, 0, 1)
 
 [node name="main_easy" type="Node2D"]
@@ -51,49 +62,33 @@ scale = Vector2(0.663123, 0.563251)
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_pvrn7")]
 position = Vector2(1010, 694)
 
-[node name="Window" type="Window" parent="."]
-position = Vector2i(0, 36)
-visible = false
-
-[node name="Endgame" parent="." instance=ExtResource("4_fqe4k")]
-visible = false
-
-[node name="AcceptDialog" type="AcceptDialog" parent="."]
-position = Vector2i(0, 36)
-
-[node name="ParallaxBackground" parent="." instance=ExtResource("5_1hkvr")]
-offset = Vector2(500, 300)
-scale = Vector2(2.5, 2.5)
-transform = Transform2D(2.5, 0, 0, 2.5, 500, 300)
-
 [node name="cameraOfMain" type="Camera2D" parent="."]
 z_index = 10
 position = Vector2(1012, 772)
 script = ExtResource("6_8myr3")
-speed = 750.0
 
 [node name="key3" type="Sprite2D" parent="cameraOfMain"]
 z_index = 2
-position = Vector2(-609, -457.64)
+position = Vector2(677, -450.64)
 scale = Vector2(1, 0.956)
 texture = ExtResource("7_gxjtr")
 
 [node name="key2" type="Sprite2D" parent="cameraOfMain"]
 z_index = 2
-position = Vector2(-735, -457.64)
+position = Vector2(551, -450.64)
 scale = Vector2(1, 0.913)
 texture = ExtResource("7_gxjtr")
 
 [node name="key1" type="Sprite2D" parent="cameraOfMain"]
 z_index = 2
-position = Vector2(-864, -454.64)
+position = Vector2(422, -447.64)
 texture = ExtResource("7_gxjtr")
 
 [node name="satamina" type="ProgressBar" parent="cameraOfMain"]
-offset_left = -692.0
-offset_top = 416.0
-offset_right = -452.0
-offset_bottom = 443.0
+offset_left = -777.0
+offset_top = 420.0
+offset_right = -537.0
+offset_bottom = 447.0
 theme_override_colors/font_outline_color = Color(0.169537, 0.0830187, 0.0855262, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_gy4he")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fy6oq")
@@ -104,18 +99,23 @@ show_percentage = false
 [node name="mana" type="Label" parent="cameraOfMain/satamina"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.579167
-anchor_top = 2.44445
-anchor_right = -0.2625
-anchor_bottom = 2.44445
+anchor_left = 0.358333
+anchor_top = 4.11111
+anchor_right = 0.725
+anchor_bottom = 4.11111
 offset_left = -59.0
 offset_top = -73.0
 offset_right = 36.0
 offset_bottom = -27.0
-text = "  / 100"
+text = "100  / 100"
 label_settings = SubResource("LabelSettings_550vc")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Pngegg(1)" type="Sprite2D" parent="cameraOfMain/satamina"]
+position = Vector2(-63, 4.99998)
+scale = Vector2(0.0973307, 0.106771)
+texture = ExtResource("9_2i8f3")
 
 [node name="LineEdit" type="LineEdit" parent="cameraOfMain"]
 z_index = 2
@@ -137,12 +137,22 @@ max_length = 15
 metadata/_edit_use_anchors_ = true
 
 [node name="time" type="Label" parent="cameraOfMain"]
-offset_left = 456.0
-offset_top = -493.0
-offset_right = 496.0
-offset_bottom = -424.0
+offset_left = -946.0
+offset_top = -490.0
+offset_right = -486.0
+offset_bottom = -421.0
 text = "time"
 label_settings = SubResource("LabelSettings_21780")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="cameraOfMain/time"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = -22.0
+offset_right = 249.0
+offset_bottom = 4.0
+text = "time"
+label_settings = SubResource("LabelSettings_ufh80")
 
 [node name="score" type="Label" parent="cameraOfMain"]
 anchors_preset = 3
@@ -150,17 +160,47 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 350.0
-offset_top = 372.0
-offset_right = 907.0
-offset_bottom = 475.0
+offset_left = 341.0
+offset_top = 307.0
+offset_right = 959.0
+offset_bottom = 499.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "0"
 label_settings = SubResource("LabelSettings_7fg22")
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="cameraOfMain/score"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = -32.0
+offset_right = 91.0
+offset_bottom = 32.0
+grow_horizontal = 2
+text = "score "
+label_settings = SubResource("LabelSettings_tdhcg")
+
+[node name="pause" type="Button" parent="cameraOfMain"]
+offset_left = 785.0
+offset_top = -495.0
+offset_right = 893.0
+offset_bottom = -398.0
+
 [node name="gameover" parent="." instance=ExtResource("9_jtwel")]
 position = Vector2(1028, 652)
 
+[node name="pause_scene" parent="." instance=ExtResource("11_prvbw")]
+position = Vector2(1049, 659)
+scale = Vector2(0.75, 0.75)
+
+[node name="EasyBg" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(1055, 637)
+scale = Vector2(5, 4.694)
+texture = ExtResource("10_dfc8d")
+
 [connection signal="text_submitted" from="cameraOfMain/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="cameraOfMain/pause" to="." method="_on_pause_pressed"]

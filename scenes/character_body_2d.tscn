@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dc3cfknlc05fq"]
+[gd_scene load_steps=44 format=3 uid="uid://dc3cfknlc05fq"]
 
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="1_8twcd"]
 [ext_resource type="Texture2D" uid="uid://dvd0uc1niyy65" path="res://png-20250320T090118Z-001/png/Idle (1).png" id="2_f62eo"]
@@ -24,17 +24,23 @@
 [ext_resource type="Texture2D" uid="uid://bxlku2seipny6" path="res://assets/player/Idle (10).png" id="12_2ci1e"]
 [ext_resource type="Texture2D" uid="uid://bfdw7lhukbd0r" path="res://assets/player/Jump (11).png" id="12_q4cga"]
 [ext_resource type="Texture2D" uid="uid://caxxf8oor45gn" path="res://assets/player/Jump (12).png" id="13_2ymcx"]
+[ext_resource type="Texture2D" uid="uid://p5y7dggl8qfb" path="res://png-20250320T090118Z-001/png/Slide (1).png" id="24_po0w3"]
 [ext_resource type="Texture2D" uid="uid://3lm2kvdr8g67" path="res://assets/player/Hurt (1).png" id="24_x080l"]
 [ext_resource type="Texture2D" uid="uid://cniqqkoglb2b4" path="res://assets/player/Hurt (2).png" id="25_4nr5r"]
+[ext_resource type="Texture2D" uid="uid://co1tl1ubqioe5" path="res://png-20250320T090118Z-001/png/Slide (2).png" id="25_s3g73"]
 [ext_resource type="Texture2D" uid="uid://ckb5e0jwgaeyk" path="res://assets/player/Hurt (3).png" id="26_8tk47"]
+[ext_resource type="Texture2D" uid="uid://dplwkad6ydsg3" path="res://png-20250320T090118Z-001/png/Slide (3).png" id="26_c253n"]
 [ext_resource type="Texture2D" uid="uid://6al1wspesj2e" path="res://assets/player/Hurt (4).png" id="27_qps28"]
+[ext_resource type="Texture2D" uid="uid://c2akobruqac" path="res://png-20250320T090118Z-001/png/Slide (4).png" id="27_smxr5"]
 [ext_resource type="Texture2D" uid="uid://bifw5chjsotuu" path="res://assets/player/Hurt (5).png" id="28_64jf8"]
+[ext_resource type="Texture2D" uid="uid://bl8kggrignvxf" path="res://png-20250320T090118Z-001/png/Slide (5).png" id="28_er8a6"]
 [ext_resource type="Texture2D" uid="uid://r02vwevjbjc7" path="res://assets/player/Hurt (6).png" id="29_lhqlr"]
 [ext_resource type="Texture2D" uid="uid://cjwf25m01fpje" path="res://assets/player/Hurt (7).png" id="30_8iopd"]
 [ext_resource type="Texture2D" uid="uid://bjr3agck7632m" path="res://assets/player/Hurt (8).png" id="31_xdfjr"]
 [ext_resource type="Texture2D" uid="uid://dnbpnsdo5k5lx" path="res://assets/player/Dead (1).png" id="32_nx73e"]
 [ext_resource type="Texture2D" uid="uid://bfyg4463lk0yd" path="res://assets/player/Dead (2).png" id="33_hye7j"]
 [ext_resource type="Texture2D" uid="uid://dasnaerqbjdm3" path="res://assets/player/Dead (3).png" id="34_84tk6"]
+[ext_resource type="Script" path="res://scripts/animation.gd" id="35_4lk0y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_47wuj"]
 animations = [{
@@ -116,6 +122,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("24_po0w3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_s3g73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_c253n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_smxr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_er8a6")
+}],
+"loop": true,
+"name": &"start",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("32_nx73e")
 }, {
 "duration": 1.0,
@@ -175,7 +201,8 @@ script = ExtResource("1_8twcd")
 position = Vector2(-34, -100)
 scale = Vector2(0.551277, 0.529437)
 sprite_frames = SubResource("SpriteFrames_47wuj")
-animation = &"yeah"
+animation = &"jump"
+script = ExtResource("35_4lk0y")
 
 [node name="Icon" type="Sprite2D" parent="."]
 visible = false

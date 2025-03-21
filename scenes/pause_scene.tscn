@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dskl3cm1c1t5c"]
+
+[ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="1_7y46v"]
+[ext_resource type="Script" path="res://scripts/pause_scene.gd" id="1_muvfb"]
+[ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="2_7dtuw"]
+
+[node name="pause_scene" type="Node2D"]
+script = ExtResource("1_muvfb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7y46v")
+
+[node name="resume" type="Button" parent="Sprite2D"]
+offset_left = -231.0
+offset_top = -272.0
+offset_right = 236.0
+offset_bottom = -127.0
+theme_override_fonts/font = ExtResource("2_7dtuw")
+theme_override_font_sizes/font_size = 50
+text = "resume"
+
+[node name="back" type="Button" parent="Sprite2D"]
+offset_left = -238.0
+offset_top = 3.0
+offset_right = 229.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("2_7dtuw")
+theme_override_font_sizes/font_size = 50
+text = "back"
+
+[connection signal="pressed" from="Sprite2D/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Sprite2D/back" to="." method="_on_back_pressed"]
