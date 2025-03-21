@@ -4,13 +4,14 @@ extends Node2D
 var child_nodes = []
 var myParent_node 
 #var my = preload("res://scenes/newnode.tscn")
-@onready var display_equation = $"รูปวงกลม/Label"
+@onready var display_equation = $Label
 var answer : int 
 var connect_to = []
 #var player = preload("res://scenes/player.tscn").instantiate()
 
 func _ready() -> void:
 	hide()
+	
 
 func add_connect_node(rainbow:Node2D):
 	connect_to.append(rainbow)
@@ -77,6 +78,18 @@ func get_parent_node() -> Node2D :
 	return myParent_node
 	
 func show_equation() :
+	
+	var colors = [
+		Color(1, 0, 0),    # แดง
+		Color(1, 0.5, 0),  # ส้ม
+		Color(1, 1, 0),    # เหลือง
+		Color(0, 1, 0),    # เขียว
+		Color(0, 0, 1),    # น้ำเงิน
+		Color(0.29, 0, 0.51), # คราม
+		Color(0.56, 0, 1)  # ม่วง
+	]
+	var random_color = colors[randi_range(0,colors.size()-1)]
+	display_equation.modulate = random_color 
 	display_equation.show()
 
 func hide_equation() :
@@ -103,3 +116,10 @@ signal player_exited_area(Mynode:Node2D,body: Node2D)
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	
 	emit_signal("player_exited_area", self , body)
+
+var first = true
+func not_first() :
+	first = false
+
+func on_first() -> bool:
+	return first

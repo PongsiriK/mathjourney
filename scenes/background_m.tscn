@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7t8l6y24j8q4"]
+
+[ext_resource type="Texture2D" uid="uid://7n4xv4xhadsy" path="res://pngtree-sky-evening-cloud-sky-no-photography-map-with-map-image_787066.jpg" id="1_tbnmm"]
+[ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="2_qvvrp"]
+[ext_resource type="Script" path="res://scenes/mek.gd" id="3_k3lue"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="1649191017104023p3104" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(10, 52)
+scale = Vector2(2.47973, 2.21016)
+texture = ExtResource("1_tbnmm")
+
+[node name="07r58piCzC736eVsct0qfPic2018" type="Sprite2D" parent="."]
+position = Vector2(-1655, -38)
+scale = Vector2(0.886, 0.893)
+texture = ExtResource("2_qvvrp")
+script = ExtResource("3_k3lue")

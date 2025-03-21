@@ -1,14 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4ti4oqk7cjs6"]
+[gd_scene load_steps=15 format=3 uid="uid://bgipt68f77bvt"]
 
-[ext_resource type="Script" path="res://scripts/newmain.gd" id="1_h5uav"]
-[ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="2_wyfh8"]
-[ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="3_u2li7"]
-[ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="4_v53l3"]
-[ext_resource type="PackedScene" uid="uid://b7t8l6y24j8q4" path="res://scenes/background_m.tscn" id="5_lljrh"]
-[ext_resource type="PackedScene" uid="uid://c3ip5ycscjyi4" path="res://scenes/endgame.tscn" id="6_dale8"]
-[ext_resource type="Texture2D" uid="uid://cinss5d80o73b" path="res://assets/1.png" id="7_iviom"]
-[ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="8_ke6j2"]
-[ext_resource type="PackedScene" uid="uid://xw6er04nvef5" path="res://scenes/gameover.tscn" id="9_gm4xj"]
+[ext_resource type="Script" path="res://scripts/playgame_easy.gd" id="1_68pqk"]
+[ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="2_q4xn7"]
+[ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="3_pvrn7"]
+[ext_resource type="PackedScene" uid="uid://c3ip5ycscjyi4" path="res://scenes/endgame.tscn" id="4_fqe4k"]
+[ext_resource type="PackedScene" uid="uid://b3tycudeixng1" path="res://scenes/background.tscn" id="5_1hkvr"]
+[ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="6_8myr3"]
+[ext_resource type="Texture2D" uid="uid://cinss5d80o73b" path="res://assets/1.png" id="7_gxjtr"]
+[ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="8_i1fyi"]
+[ext_resource type="PackedScene" uid="uid://xw6er04nvef5" path="res://scenes/gameover.tscn" id="9_jtwel"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy4he"]
 bg_color = Color(0.668766, 0.561128, 0.655876, 1)
@@ -25,69 +25,69 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_550vc"]
-font = ExtResource("8_ke6j2")
+font = ExtResource("8_i1fyi")
 font_size = 33
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_21780"]
-font = ExtResource("8_ke6j2")
+font = ExtResource("8_i1fyi")
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7fg22"]
-font = ExtResource("8_ke6j2")
+font = ExtResource("8_i1fyi")
 font_size = 100
 font_color = Color(0, 0, 0, 1)
 
-[node name="Newmain" type="Node2D"]
+[node name="main_easy" type="Node2D"]
 position = Vector2(-51, -229)
-script = ExtResource("1_h5uav")
+script = ExtResource("1_68pqk")
 
-[node name="door" parent="." instance=ExtResource("3_u2li7")]
+[node name="door" parent="." instance=ExtResource("2_q4xn7")]
 z_index = 1
 position = Vector2(1008, 650)
 scale = Vector2(0.663123, 0.563251)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("4_v53l3")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_pvrn7")]
 position = Vector2(1010, 694)
 
 [node name="Window" type="Window" parent="."]
 position = Vector2i(0, 36)
 visible = false
 
-[node name="Endgame" parent="." instance=ExtResource("6_dale8")]
+[node name="Endgame" parent="." instance=ExtResource("4_fqe4k")]
 visible = false
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
 position = Vector2i(0, 36)
 
-[node name="ParallaxBackground2" parent="." instance=ExtResource("5_lljrh")]
-offset = Vector2(500, 500)
+[node name="ParallaxBackground" parent="." instance=ExtResource("5_1hkvr")]
+offset = Vector2(500, 300)
 scale = Vector2(2.5, 2.5)
-transform = Transform2D(2.5, 0, 0, 2.5, 500, 500)
+transform = Transform2D(2.5, 0, 0, 2.5, 500, 300)
 
 [node name="cameraOfMain" type="Camera2D" parent="."]
 z_index = 10
 position = Vector2(1012, 772)
-script = ExtResource("2_wyfh8")
+script = ExtResource("6_8myr3")
 speed = 750.0
 
 [node name="key3" type="Sprite2D" parent="cameraOfMain"]
 z_index = 2
 position = Vector2(-609, -457.64)
 scale = Vector2(1, 0.956)
-texture = ExtResource("7_iviom")
+texture = ExtResource("7_gxjtr")
 
 [node name="key2" type="Sprite2D" parent="cameraOfMain"]
 z_index = 2
 position = Vector2(-735, -457.64)
 scale = Vector2(1, 0.913)
-texture = ExtResource("7_iviom")
+texture = ExtResource("7_gxjtr")
 
 [node name="key1" type="Sprite2D" parent="cameraOfMain"]
 z_index = 2
 position = Vector2(-864, -454.64)
-texture = ExtResource("7_iviom")
+texture = ExtResource("7_gxjtr")
 
 [node name="satamina" type="ProgressBar" parent="cameraOfMain"]
 offset_left = -692.0
@@ -130,7 +130,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.02232, 1)
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("8_ke6j2")
+theme_override_fonts/font = ExtResource("8_i1fyi")
 theme_override_font_sizes/font_size = 60
 placeholder_text = "type the answer..."
 max_length = 15
@@ -160,7 +160,7 @@ text = "0"
 label_settings = SubResource("LabelSettings_7fg22")
 horizontal_alignment = 1
 
-[node name="gameover" parent="." instance=ExtResource("9_gm4xj")]
+[node name="gameover" parent="." instance=ExtResource("9_jtwel")]
 position = Vector2(1028, 652)
 
 [connection signal="text_submitted" from="cameraOfMain/LineEdit" to="." method="_on_line_edit_text_submitted"]

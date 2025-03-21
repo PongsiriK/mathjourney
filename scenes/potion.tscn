@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtvww0p2h7xqe"]
+[gd_scene load_steps=5 format=3 uid="uid://dtvww0p2h7xqe"]
 
-[ext_resource type="Texture2D" uid="uid://cnv8drox2cl3o" path="res://รูปวงกลม.png" id="1_uh37e"]
+[ext_resource type="Script" path="res://scripts/potion.gd" id="1_3ynen"]
+[ext_resource type="Texture2D" uid="uid://diixifaob0yhc" path="res://assets/pngegg (1).png" id="2_o0ggr"]
+[ext_resource type="Script" path="res://scripts/effect_key/รูปวงกลม.gd" id="3_7o56g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4b45o"]
 
 [node name="potion" type="Area2D"]
+script = ExtResource("1_3ynen")
 
 [node name="รูปวงกลม" type="Sprite2D" parent="."]
-scale = Vector2(0.263995, 0.974145)
-texture = ExtResource("1_uh37e")
+position = Vector2(0, -105)
+scale = Vector2(0.0745443, 0.15332)
+texture = ExtResource("2_o0ggr")
+script = ExtResource("3_7o56g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="รูปวงกลม"]
-scale = Vector2(7.07919, 5.22307)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.86887, 5.08803)
 shape = SubResource("CapsuleShape2D_4b45o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
