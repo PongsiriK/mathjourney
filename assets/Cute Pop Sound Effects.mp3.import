@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b0fgt3ixx276v"
+path="res://.godot/imported/Cute Pop Sound Effects.mp3-2ac126301dc5bfb8cf78a7da495a2c25.mp3str"
+
+[deps]
+
+source_file="res://assets/Cute Pop Sound Effects.mp3"
+dest_files=["res://.godot/imported/Cute Pop Sound Effects.mp3-2ac126301dc5bfb8cf78a7da495a2c25.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

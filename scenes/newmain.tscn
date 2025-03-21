@@ -89,9 +89,9 @@ position = Vector2i(0, 36)
 visible = false
 
 [node name="Endgame" parent="." instance=ExtResource("6_dale8")]
+visible = false
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
 position = Vector2i(0, 36)
-visible = true
 
 [connection signal="text_submitted" from="cameraOfMain/LineEdit" to="." method="_on_line_edit_text_submitted"]

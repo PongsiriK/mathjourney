@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdtg88v76jeme"
+path="res://.godot/imported/Transition - Sound Effects.mp3-d892ac6e3ecedfbd1da740e79bf2952e.mp3str"
+
+[deps]
+
+source_file="res://assets/Transition - Sound Effects.mp3"
+dest_files=["res://.godot/imported/Transition - Sound Effects.mp3-d892ac6e3ecedfbd1da740e79bf2952e.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=1.0
+bpm=0.0
+beat_count=0
+bar_beats=4
