@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csra23jajrf1h"
+path="res://.godot/imported/cartoon-fall-fail-whistle-sweep-72469-[AudioTrimmer.com] (1).mp3-ca62ff56fa7f30c36efec8b321d44f54.mp3str"
+
+[deps]
+
+source_file="res://cartoon-fall-fail-whistle-sweep-72469-[AudioTrimmer.com] (1).mp3"
+dest_files=["res://.godot/imported/cartoon-fall-fail-whistle-sweep-72469-[AudioTrimmer.com] (1).mp3-ca62ff56fa7f30c36efec8b321d44f54.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

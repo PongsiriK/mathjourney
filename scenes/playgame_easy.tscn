@@ -1,15 +1,22 @@
-[gd_scene load_steps=18 format=3 uid="uid://bgipt68f77bvt"]
+[gd_scene load_steps=28 format=3 uid="uid://bgipt68f77bvt"]
 
 [ext_resource type="Script" path="res://scripts/playgame_easy.gd" id="1_68pqk"]
 [ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="2_q4xn7"]
 [ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="3_pvrn7"]
 [ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="6_8myr3"]
+[ext_resource type="Texture2D" uid="uid://bfu6qlqh5pmge" path="res://assets/aaa/red-potion-clipart-xl.png" id="7_3oe34"]
 [ext_resource type="Texture2D" uid="uid://cinss5d80o73b" path="res://assets/1.png" id="7_gxjtr"]
+[ext_resource type="Script" path="res://scripts/in.gd" id="8_bfo76"]
 [ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="8_i1fyi"]
-[ext_resource type="Texture2D" uid="uid://diixifaob0yhc" path="res://assets/pngegg (1).png" id="9_2i8f3"]
+[ext_resource type="Script" path="res://scripts/push.gd" id="8_i1umr"]
+[ext_resource type="Script" path="res://scripts/line_edit.gd" id="8_pns2g"]
 [ext_resource type="PackedScene" uid="uid://xw6er04nvef5" path="res://scenes/gameover.tscn" id="9_jtwel"]
 [ext_resource type="Texture2D" uid="uid://vr26qc841rsw" path="res://assets/bg-20250321T181657Z-001/bg/Easy_bg.png" id="10_dfc8d"]
+[ext_resource type="Texture2D" uid="uid://ctm866fkic27b" path="res://assets/aaa/STOP.png" id="10_ximog"]
+[ext_resource type="Texture2D" uid="uid://biuvwkbnr0gue" path="res://assets/aaa/STOP_hover.png" id="11_7wvg5"]
+[ext_resource type="AudioStream" uid="uid://d1c5smt0upgpf" path="res://8-bit-video-game-fail-version-3-145479.mp3" id="11_iiv2i"]
 [ext_resource type="PackedScene" uid="uid://dskl3cm1c1t5c" path="res://scenes/pause_scene.tscn" id="11_prvbw"]
+[ext_resource type="AudioStream" uid="uid://cg508c5q0ccq1" path="res://assets/Portal Opening x32/8-bit-video-game-win-level-sound-version-1-145827.mp3" id="16_3k4fo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy4he"]
 bg_color = Color(0.668766, 0.561128, 0.655876, 1)
@@ -30,25 +37,51 @@ font = ExtResource("8_i1fyi")
 font_size = 33
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgry4"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_rno7d"]
+font = ExtResource("8_i1fyi")
+font_size = 50
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_21780"]
 font = ExtResource("8_i1fyi")
 font_size = 50
-font_color = Color(0, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ufh80"]
 font = ExtResource("8_i1fyi")
 font_size = 20
-font_color = Color(0, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7fg22"]
 font = ExtResource("8_i1fyi")
 font_size = 150
-font_color = Color(0, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_tdhcg"]
 font = ExtResource("8_i1fyi")
 font_size = 50
-font_color = Color(0, 0, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jfng5"]
+font = ExtResource("8_i1fyi")
+font_size = 50
+font_color = Color(6.257e-06, 0.910231, 0.210595, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="main_easy" type="Node2D"]
 position = Vector2(-51, -229)
@@ -89,7 +122,7 @@ offset_left = -777.0
 offset_top = 420.0
 offset_right = -537.0
 offset_bottom = 447.0
-theme_override_colors/font_outline_color = Color(0.169537, 0.0830187, 0.0855262, 1)
+theme_override_colors/font_outline_color = Color(0.772388, 0.845281, 0.874331, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_gy4he")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fy6oq")
 step = 1.0
@@ -113,9 +146,9 @@ horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Pngegg(1)" type="Sprite2D" parent="cameraOfMain/satamina"]
-position = Vector2(-63, 4.99998)
-scale = Vector2(0.0973307, 0.106771)
-texture = ExtResource("9_2i8f3")
+position = Vector2(-62, 2.00002)
+scale = Vector2(0.0596029, 0.0565104)
+texture = ExtResource("7_3oe34")
 
 [node name="LineEdit" type="LineEdit" parent="cameraOfMain"]
 z_index = 2
@@ -131,10 +164,23 @@ grow_vertical = 2
 scale = Vector2(1.02232, 1)
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("8_i1fyi")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_jgry4")
 placeholder_text = "type the answer..."
+alignment = 1
 max_length = 15
+script = ExtResource("8_pns2g")
 metadata/_edit_use_anchors_ = true
+
+[node name="in" type="Label" parent="cameraOfMain/LineEdit"]
+layout_mode = 0
+offset_left = 262.149
+offset_top = -89.0
+offset_right = 374.149
+offset_bottom = -22.0
+text = "ans"
+label_settings = SubResource("LabelSettings_rno7d")
+script = ExtResource("8_bfo76")
 
 [node name="time" type="Label" parent="cameraOfMain"]
 offset_left = -946.0
@@ -183,11 +229,25 @@ grow_horizontal = 2
 text = "score "
 label_settings = SubResource("LabelSettings_tdhcg")
 
-[node name="pause" type="Button" parent="cameraOfMain"]
-offset_left = 785.0
+[node name="push" type="Label" parent="cameraOfMain/score"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 151.0
+offset_right = 390.0
+offset_bottom = 218.0
+text = "100 +"
+label_settings = SubResource("LabelSettings_jfng5")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("8_i1umr")
+
+[node name="p" type="TextureButton" parent="cameraOfMain"]
+offset_left = 798.0
 offset_top = -495.0
-offset_right = 893.0
-offset_bottom = -398.0
+offset_right = 878.0
+offset_bottom = -399.0
+texture_normal = ExtResource("10_ximog")
+texture_hover = ExtResource("11_7wvg5")
 
 [node name="gameover" parent="." instance=ExtResource("9_jtwel")]
 position = Vector2(1028, 652)
@@ -198,9 +258,19 @@ scale = Vector2(0.75, 0.75)
 
 [node name="EasyBg" type="Sprite2D" parent="."]
 z_index = -20
-position = Vector2(1055, 637)
+position = Vector2(1071, 643)
 scale = Vector2(5, 4.694)
 texture = ExtResource("10_dfc8d")
 
+[node name="win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_3k4fo")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="game_over" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_iiv2i")
+volume_db = -20.0
+bus = &"sfx"
+
 [connection signal="text_submitted" from="cameraOfMain/LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="cameraOfMain/pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="cameraOfMain/p" to="." method="_on_p_pressed"]

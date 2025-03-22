@@ -18,7 +18,7 @@ var pause = false
 var max_depth = 4
 #var numOfNode = 0
 var curent_node
-var speed = 600
+var speed = 1200
 var checkAnswer = []
 
 var node_pack = []
@@ -69,9 +69,28 @@ var milliseconds_text = "00"
 @onready var score_show = $cameraOfMain/score
 var score = 0 
 
+func start_game_now():
+	camera.pause_set(true)
+	input_answer.editable = false
+	await wait(3)
+	camera.pause_set(false)
+	input_answer.editable = true
+	
+@onready var push_score = $cameraOfMain/score/push
 func add_score(num:int):
 	score += num
 	score_show.text = str(score)
+	show_floating_text(str(num) + "+",push_score)
+
+func show_floating_text(text_to_show: String ,label:Label):
+	
+	label.text = text_to_show
+	label.modulate.a = 1 # สีขาว ไม่
+	
+	var tween = create_tween()
+	tween.tween_property(label, "modulate", Color(1, 1, 1, 0), 2).set_trans(Tween.TRANS_LINEAR)
+	await tween.finished
+
 #func _process(delta: float) -> void:
 func _process(delta: float) -> void:
 	
@@ -91,29 +110,29 @@ func _process(delta: float) -> void:
 # แสดงผล
 
 ################################################################################################################	
-	var direction = Vector2.ZERO
-
-
-	if Input.is_action_pressed("up"):  # กด D
-		direction.y -= 1
-		
-		
-	if Input.is_action_pressed("down"):   # กด A
-		direction.y += 1
-		
-	if Input.is_action_pressed("left"):   # กด S
-		direction.x -= 1
-	if Input.is_action_pressed("rigth"):     # กด W
-		direction.x += 1
-
-	if direction != Vector2.ZERO:
-		direction = direction.normalized()  # ป้องกันการเคลื่อนที่เร็วขึ้นเมื่อกดสองปุ่มพร้อมกัน
-
-	
-	player.position += direction * speed * delta
+	#var direction = Vector2.ZERO
+#
+#
+	#if Input.is_action_pressed("up"):  # กด D
+		#direction.y -= 1
+		#
+		#
+	#if Input.is_action_pressed("down"):   # กด A
+		#direction.y += 1
+		#
+	#if Input.is_action_pressed("left"):   # กด S
+		#direction.x -= 1
+	#if Input.is_action_pressed("rigth"):     # กด W
+		#direction.x += 1
+#
+	#if direction != Vector2.ZERO:
+		#direction = direction.normalized()  # ป้องกันการเคลื่อนที่เร็วขึ้นเมื่อกดสองปุ่มพร้อมกัน
+#
+	#
+	#player.position += direction * speed * delta
 ###############################################################################################################
 var r = 350
-
+var time_text = minutes_text + ":" + seconds_text + ":" + milliseconds_text
 func _ready() -> void:
 	
 	pause_scene.connect("resume_game",unpause)
@@ -240,6 +259,8 @@ func _ready() -> void:
 	print(key_node)
 	print("===========================================================")
 	print(potion_node)
+	start_game_now()
+	game_over.mode = 1
 # ฟังก์ชันสร้างโหนดลูก
 func create_child_nodes(parent_node: Node2D, parent_angle: float, depth: int , group: int) -> void:
 	#if depth == max_depth - 1 :
@@ -447,6 +468,7 @@ func move_player_to_node(target_node: Node2D) -> void:
 		player.play_jump_R() 
 	#check_current_node()
 
+@onready var in_show = $cameraOfMain/LineEdit/in
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	input_answer.text = ""
 	if not start :
@@ -469,10 +491,15 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 				if new_text.strip_edges() == str(child.get_answer()) :
 					move_player_to_node(child)
 					corect = true
-					
+	
+	
 	if not corect :
 		player.wrong()
+		in_show.modulate = Color.RED
 		used_mana()
+	else :
+		in_show.modulate = Color.GREEN
+	show_floating_text(new_text,in_show)
 	#print(pack_answer)
 
 func random_equation(nodeSetAnswer : Node2D ,excluded_answers: Array ) -> int:
@@ -592,7 +619,7 @@ func body_entered_thedoor(body:Node2D):
 	var max_score = 5000
 	stop_timer()
 # คำนวณคะแนน
-	score = calculate_score(time_elapsed, max_time, min_time, max_score)
+	score += calculate_score(time_elapsed, max_time, min_time, max_score)
 	
 	show_game_over_popup()
 	
@@ -689,6 +716,8 @@ func used_mana():
 	mana.value = current_mana
 	show_mana.text =  str(current_mana) + " / 100"
 	#mana.visible = true
+	if current_mana == 0 :
+		show_game_over_lose()
 
 
 
@@ -710,22 +739,44 @@ func used_mana():
 #@onready var dialog = $AcceptDialog
 
 @onready var game_over = $gameover
-func show_game_over_popup():
+@onready var lose = $game_over
+
+func show_game_over_lose():
+	flash_white_screen(2.0, 2.0)
+	lose.play()
 	game_over.allow_all()
 	camera.global_position = game_over.global_position
-	game_over.result_score(score)
+	game_over.result_score(score, minutes,seconds,milliseconds,"YOU LOSE")
+	camera.pause_set(true)
+	for element in camera.get_children():
+		element.visible = false
+	pause_but.disabled = true
+	input_answer.editable = true
+
+
+func show_game_over_popup():
+	flash_white_screen(2.0, 2.0)
+	win.play()
+	game_over.allow_all()
+	camera.global_position = game_over.global_position
+	game_over.result_score(score, minutes,seconds,milliseconds,"YOU WIN")
 	camera.pause_set(true)
 	for element in camera.get_children():
 		element.visible = false
 	pause_but.disabled = true
 	input_answer.editable = true
 		
-@onready var pause_but = $cameraOfMain/pause
+@onready var pause_but = $cameraOfMain/p
 @onready var pause_scene = $pause_scene
 func pause_game () :
 	pause_scene.allow_all()
 	pause = true
-	pause_scene.global_position = camera.global_position
+	pause_scene.global_position.x = get_viewport_rect().size.x / 2
+	pause_scene.global_position.y = get_viewport_rect().size.y - 2000
+	var tween = create_tween()  # หยุด Tween ก่อนหน้า
+	tween.tween_property(pause_scene, "global_position", camera.global_position, 1).set_ease(Tween.EASE_IN_OUT)
+	pause_scene.global_position 
+	
 	stop_timer()
 	camera.pause_set(true)
 	input_answer.hide()
@@ -756,5 +807,22 @@ func unpause():
 	input_answer.editable = true
 	pause_but.show()
 	
-func _on_pause_pressed() -> void:
+
+
+func flash_white_screen(duration: float = 1.0, wait_time: float = 1.0):
+	var white_screen = ColorRect.new()
+	white_screen.color = Color(1, 1, 1, 1) # สีขาวทึบ
+	white_screen.size = Vector2(5000,5000)
+	white_screen.z_index = 25
+	add_child(white_screen)
+
+	await get_tree().create_timer(wait_time).timeout # รอ wait_time วินาที
+	
+	var tween = create_tween()
+	tween.tween_property(white_screen, "modulate", Color(1, 1, 1, 0), duration).set_trans(Tween.TRANS_LINEAR)
+	await tween.finished
+	white_screen.queue_free()
+
+@onready var win = $win
+func _on_p_pressed() -> void:
 	pause_game()

@@ -1,0 +1,276 @@
+[gd_scene load_steps=28 format=3 uid="uid://dfc1liooycruj"]
+
+[ext_resource type="Script" path="res://scenes/playgame_easy_mid.gd" id="1_u0y2g"]
+[ext_resource type="PackedScene" uid="uid://b23crrlshmmj5" path="res://scenes/door.tscn" id="2_utksi"]
+[ext_resource type="PackedScene" uid="uid://dc3cfknlc05fq" path="res://scenes/character_body_2d.tscn" id="3_38bm8"]
+[ext_resource type="Script" path="res://scripts/cameraOfMain.gd" id="4_mft0j"]
+[ext_resource type="Texture2D" uid="uid://cinss5d80o73b" path="res://assets/1.png" id="5_fmxwu"]
+[ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="6_idonw"]
+[ext_resource type="Texture2D" uid="uid://bfu6qlqh5pmge" path="res://assets/aaa/red-potion-clipart-xl.png" id="7_mc2qs"]
+[ext_resource type="Script" path="res://scripts/line_edit.gd" id="8_ibpaf"]
+[ext_resource type="Script" path="res://scripts/in.gd" id="9_jmwq1"]
+[ext_resource type="Script" path="res://scripts/push.gd" id="10_hm75b"]
+[ext_resource type="Texture2D" uid="uid://ctm866fkic27b" path="res://assets/aaa/STOP.png" id="11_7x6kp"]
+[ext_resource type="Texture2D" uid="uid://biuvwkbnr0gue" path="res://assets/aaa/STOP_hover.png" id="12_jpvbv"]
+[ext_resource type="PackedScene" uid="uid://xw6er04nvef5" path="res://scenes/gameover.tscn" id="13_6d1pr"]
+[ext_resource type="PackedScene" uid="uid://dskl3cm1c1t5c" path="res://scenes/pause_scene.tscn" id="14_idya3"]
+[ext_resource type="Texture2D" uid="uid://bjc0rrc6g12md" path="res://assets/bg-20250321T181657Z-001/bg/Medium_bg.jpg" id="15_cgamy"]
+[ext_resource type="AudioStream" uid="uid://cg508c5q0ccq1" path="res://assets/Portal Opening x32/8-bit-video-game-win-level-sound-version-1-145827.mp3" id="16_1sluw"]
+[ext_resource type="AudioStream" uid="uid://d1c5smt0upgpf" path="res://8-bit-video-game-fail-version-3-145479.mp3" id="16_h1pyw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy4he"]
+bg_color = Color(0.668766, 0.561128, 0.655876, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy6oq"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_550vc"]
+font = ExtResource("6_idonw")
+font_size = 33
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgry4"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_rno7d"]
+font = ExtResource("6_idonw")
+font_size = 50
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_21780"]
+font = ExtResource("6_idonw")
+font_size = 50
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ufh80"]
+font = ExtResource("6_idonw")
+font_size = 20
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7fg22"]
+font = ExtResource("6_idonw")
+font_size = 150
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tdhcg"]
+font = ExtResource("6_idonw")
+font_size = 50
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jfng5"]
+font = ExtResource("6_idonw")
+font_size = 50
+font_color = Color(6.257e-06, 0.910231, 0.210595, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="main_mid" type="Node2D"]
+position = Vector2(-51, -229)
+script = ExtResource("1_u0y2g")
+
+[node name="door" parent="." instance=ExtResource("2_utksi")]
+z_index = 1
+position = Vector2(1008, 650)
+scale = Vector2(0.663123, 0.563251)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_38bm8")]
+position = Vector2(1010, 694)
+
+[node name="cameraOfMain" type="Camera2D" parent="."]
+z_index = 10
+position = Vector2(1012, 772)
+script = ExtResource("4_mft0j")
+
+[node name="key3" type="Sprite2D" parent="cameraOfMain"]
+z_index = 2
+position = Vector2(677, -450.64)
+scale = Vector2(1, 0.956)
+texture = ExtResource("5_fmxwu")
+
+[node name="key2" type="Sprite2D" parent="cameraOfMain"]
+z_index = 2
+position = Vector2(551, -450.64)
+scale = Vector2(1, 0.913)
+texture = ExtResource("5_fmxwu")
+
+[node name="key1" type="Sprite2D" parent="cameraOfMain"]
+z_index = 2
+position = Vector2(422, -447.64)
+texture = ExtResource("5_fmxwu")
+
+[node name="satamina" type="ProgressBar" parent="cameraOfMain"]
+offset_left = -777.0
+offset_top = 420.0
+offset_right = -537.0
+offset_bottom = 447.0
+theme_override_colors/font_outline_color = Color(0.772388, 0.845281, 0.874331, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_gy4he")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fy6oq")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="mana" type="Label" parent="cameraOfMain/satamina"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.358333
+anchor_top = 4.11111
+anchor_right = 0.725
+anchor_bottom = 4.11111
+offset_left = -59.0
+offset_top = -73.0
+offset_right = 36.0
+offset_bottom = -27.0
+text = "100  / 100"
+label_settings = SubResource("LabelSettings_550vc")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Pngegg(1)" type="Sprite2D" parent="cameraOfMain/satamina"]
+position = Vector2(-62, 2.00002)
+scale = Vector2(0.0596029, 0.0565104)
+texture = ExtResource("7_mc2qs")
+
+[node name="LineEdit" type="LineEdit" parent="cameraOfMain"]
+z_index = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -306.0
+offset_top = 389.0
+offset_right = 294.0
+offset_bottom = 474.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.02232, 1)
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_idonw")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_jgry4")
+placeholder_text = "type the answer..."
+alignment = 1
+max_length = 15
+script = ExtResource("8_ibpaf")
+metadata/_edit_use_anchors_ = true
+
+[node name="in" type="Label" parent="cameraOfMain/LineEdit"]
+layout_mode = 0
+offset_left = 262.149
+offset_top = -89.0
+offset_right = 374.149
+offset_bottom = -22.0
+text = "ans"
+label_settings = SubResource("LabelSettings_rno7d")
+script = ExtResource("9_jmwq1")
+
+[node name="time" type="Label" parent="cameraOfMain"]
+offset_left = -946.0
+offset_top = -490.0
+offset_right = -486.0
+offset_bottom = -421.0
+text = "time"
+label_settings = SubResource("LabelSettings_21780")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="cameraOfMain/time"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = -22.0
+offset_right = 249.0
+offset_bottom = 4.0
+text = "time"
+label_settings = SubResource("LabelSettings_ufh80")
+
+[node name="score" type="Label" parent="cameraOfMain"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 341.0
+offset_top = 307.0
+offset_right = 959.0
+offset_bottom = 499.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_7fg22")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="cameraOfMain/score"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = -32.0
+offset_right = 91.0
+offset_bottom = 32.0
+grow_horizontal = 2
+text = "score "
+label_settings = SubResource("LabelSettings_tdhcg")
+
+[node name="push" type="Label" parent="cameraOfMain/score"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 151.0
+offset_right = 390.0
+offset_bottom = 218.0
+text = "100 +"
+label_settings = SubResource("LabelSettings_jfng5")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("10_hm75b")
+
+[node name="p" type="TextureButton" parent="cameraOfMain"]
+offset_left = 798.0
+offset_top = -495.0
+offset_right = 878.0
+offset_bottom = -399.0
+texture_normal = ExtResource("11_7x6kp")
+texture_hover = ExtResource("12_jpvbv")
+
+[node name="gameover" parent="." instance=ExtResource("13_6d1pr")]
+position = Vector2(1028, 652)
+
+[node name="pause_scene" parent="." instance=ExtResource("14_idya3")]
+position = Vector2(1049, 659)
+scale = Vector2(0.75, 0.75)
+
+[node name="EasyBg" type="Sprite2D" parent="."]
+z_index = -20
+position = Vector2(1071, 643)
+scale = Vector2(5, 4.694)
+texture = ExtResource("15_cgamy")
+
+[node name="win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_1sluw")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="game_over" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_h1pyw")
+volume_db = -20.0
+bus = &"sfx"
+
+[connection signal="text_submitted" from="cameraOfMain/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="cameraOfMain/p" to="." method="_on_p_pressed"]

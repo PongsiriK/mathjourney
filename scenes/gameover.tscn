@@ -1,12 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://xw6er04nvef5"]
+[gd_scene load_steps=13 format=3 uid="uid://xw6er04nvef5"]
 
-[ext_resource type="Texture2D" uid="uid://naamt47xu3s" path="res://07R58PICzC736eVSCT0QF_PIC2018.png" id="1_iud4k"]
 [ext_resource type="Script" path="res://scripts/gameover.gd" id="1_r4n6y"]
 [ext_resource type="FontFile" uid="uid://sgcwtu6gcnpb" path="res://assets/Days_One/DaysOne-Regular.ttf" id="2_1o4hc"]
+[ext_resource type="Texture2D" uid="uid://cf3437lf18h0f" path="res://assets/Rectangle 2.png" id="2_ta0rj"]
+[ext_resource type="Texture2D" uid="uid://q0iswrun34vw" path="res://assets/aaa/PLAY AGAIN.png" id="4_lrq3p"]
+[ext_resource type="Texture2D" uid="uid://kfuub6658na" path="res://assets/aaa/PLAY AGAIN_hover.png" id="5_veinc"]
+[ext_resource type="Texture2D" uid="uid://bcvxo7s6r4lyd" path="res://assets/MAIN MENU.png" id="6_0qxf5"]
+[ext_resource type="Texture2D" uid="uid://b36j7t815lw83" path="res://assets/MAIN MENU_hover.png" id="7_p11vh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5p48g"]
 font = ExtResource("2_1o4hc")
-font_size = 150
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y2ff5"]
+font = ExtResource("2_1o4hc")
+font_size = 80
+font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ifqte"]
+font = ExtResource("2_1o4hc")
+font_size = 80
+font_color = Color(0, 0.670588, 0.168627, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g6jvd"]
+font = ExtResource("2_1o4hc")
+font_size = 80
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2hs2"]
+font = ExtResource("2_1o4hc")
+font_size = 80
 font_color = Color(0, 0, 0, 1)
 
 [node name="gameover" type="Node2D"]
@@ -15,44 +41,71 @@ scale = Vector2(1.25, 1.25)
 script = ExtResource("1_r4n6y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.80725, 1.08075)
-texture = ExtResource("1_iud4k")
-
-[node name="again" type="Button" parent="."]
-offset_left = -435.0
-offset_top = 336.0
-offset_right = -157.0
-offset_bottom = 454.0
-theme_override_fonts/font = ExtResource("2_1o4hc")
-theme_override_font_sizes/font_size = 50
-text = "again"
-
-[node name="back" type="Button" parent="."]
-offset_left = 79.0
-offset_top = 335.0
-offset_right = 357.0
-offset_bottom = 453.0
-theme_override_fonts/font = ExtResource("2_1o4hc")
-theme_override_font_sizes/font_size = 50
-text = "BACK"
+position = Vector2(4.00002, -12.8)
+scale = Vector2(1.03433, 1.052)
+texture = ExtResource("2_ta0rj")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -419.0
-offset_top = -201.0
-offset_right = 406.0
-offset_bottom = 11.0
-text = "score :"
+offset_left = -355.2
+offset_top = -303.2
+offset_right = 368.8
+offset_bottom = -111.2
+text = "result"
 label_settings = SubResource("LabelSettings_5p48g")
 horizontal_alignment = 1
 
-[node name="score" type="Label" parent="."]
-offset_left = -428.0
-offset_top = 27.0
-offset_right = 397.0
-offset_bottom = 239.0
-text = "111"
-label_settings = SubResource("LabelSettings_5p48g")
+[node name="time" type="Label" parent="."]
+offset_left = -49.6
+offset_top = 3.2
+offset_right = 529.4
+offset_bottom = 195.2
+text = "11
+"
+label_settings = SubResource("LabelSettings_y2ff5")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="again" to="." method="_on_again_pressed"]
-[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[node name="again_B" type="TextureButton" parent="."]
+offset_left = -508.0
+offset_top = 210.4
+offset_right = -52.0
+offset_bottom = 327.4
+texture_normal = ExtResource("4_lrq3p")
+texture_hover = ExtResource("5_veinc")
+
+[node name="back_B" type="TextureButton" parent="."]
+offset_left = 60.0
+offset_top = 207.2
+offset_right = 499.0
+offset_bottom = 271.2
+texture_normal = ExtResource("6_0qxf5")
+texture_hover = ExtResource("7_p11vh")
+
+[node name="sco" type="Label" parent="."]
+offset_left = -27.2
+offset_top = -178.4
+offset_right = 505.8
+offset_bottom = -24.4
+text = "150"
+label_settings = SubResource("LabelSettings_ifqte")
+horizontal_alignment = 1
+
+[node name="sco2" type="Label" parent="."]
+offset_left = -509.6
+offset_top = -182.4
+offset_right = 23.4
+offset_bottom = -28.4
+text = "score"
+label_settings = SubResource("LabelSettings_g6jvd")
+horizontal_alignment = 1
+
+[node name="time2" type="Label" parent="."]
+offset_left = -502.4
+offset_top = -3.20004
+offset_right = 76.6
+offset_bottom = 188.8
+text = "time taken"
+label_settings = SubResource("LabelSettings_u2hs2")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="again_B" to="." method="_on_again_b_pressed"]
+[connection signal="pressed" from="back_B" to="." method="_on_back_b_pressed"]

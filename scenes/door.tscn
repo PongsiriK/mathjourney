@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b23crrlshmmj5"]
+[gd_scene load_steps=28 format=3 uid="uid://b23crrlshmmj5"]
 
 [ext_resource type="Script" path="res://scripts/door.gd" id="1_o4oor"]
 [ext_resource type="Texture2D" uid="uid://b27kvc687okak" path="res://assets/Group 23.png" id="2_7k282"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bpg8n6o7i6iiu" path="res://assets/Portal Opening x32/portal opening/Sequence08.png" id="22_rjacv"]
 [ext_resource type="Texture2D" uid="uid://biv2n6twdo0i3" path="res://assets/Portal Opening x32/portal opening/Sequence09.png" id="23_76snm"]
 [ext_resource type="Texture2D" uid="uid://brgeo3jijp06h" path="res://assets/Portal Opening x32/portal opening/Sequence10.png" id="24_sesx8"]
+[ext_resource type="AudioStream" uid="uid://b7exgdc4igy28" path="res://the-portal-90750.mp3" id="25_nwqd1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mt7j"]
 size = Vector2(226, 275)
@@ -160,5 +161,9 @@ sprite_frames = SubResource("SpriteFrames_o21u3")
 animation = &"open"
 frame = 21
 frame_progress = 1.0
+
+[node name="The-portal-90750" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_nwqd1")
+bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

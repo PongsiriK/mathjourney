@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvdtrxkcriqal"]
+[gd_scene load_steps=6 format=3 uid="uid://cvdtrxkcriqal"]
 
 [ext_resource type="Script" path="res://scripts/key.gd" id="1_lt6h8"]
 [ext_resource type="Texture2D" uid="uid://c3m8l33fc3iaf" path="res://assets/Group 27.png" id="2_sofrp"]
 [ext_resource type="Script" path="res://scripts/effect_key/key_eff.gd" id="3_nvdsg"]
+[ext_resource type="AudioStream" uid="uid://b2v5rsge11e8d" path="res://classic-game-action-positive-5-224402.mp3" id="4_l1ecn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u5j6"]
 radius = 48.0416
@@ -18,5 +19,10 @@ script = ExtResource("3_nvdsg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1u5j6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_l1ecn")
+volume_db = -10.0
+bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

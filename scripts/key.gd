@@ -13,4 +13,5 @@ func _process(delta: float) -> void:
 signal get_the_key(body:Node2D,key:Node2D)
 
 func _on_body_entered(body: Node2D) -> void:
+	$AudioStreamPlayer.play()
 	emit_signal("get_the_key",body,self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dc3cfknlc05fq"]
+[gd_scene load_steps=49 format=3 uid="uid://dc3cfknlc05fq"]
 
 [ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="1_8twcd"]
 [ext_resource type="Texture2D" uid="uid://dvd0uc1niyy65" path="res://png-20250320T090118Z-001/png/Idle (1).png" id="2_f62eo"]
@@ -41,6 +41,11 @@
 [ext_resource type="Texture2D" uid="uid://bfyg4463lk0yd" path="res://assets/player/Dead (2).png" id="33_hye7j"]
 [ext_resource type="Texture2D" uid="uid://dasnaerqbjdm3" path="res://assets/player/Dead (3).png" id="34_84tk6"]
 [ext_resource type="Script" path="res://scripts/animation.gd" id="35_4lk0y"]
+[ext_resource type="AudioStream" uid="uid://d0flfi466cn1w" path="res://retro-coin-4-236671.mp3" id="42_7m06i"]
+[ext_resource type="AudioStream" uid="uid://c5nal242ihgy" path="res://no-96018.mp3" id="43_n1jj2"]
+[ext_resource type="AudioStream" uid="uid://csra23jajrf1h" path="res://cartoon-fall-fail-whistle-sweep-72469-[AudioTrimmer.com] (1).mp3" id="44_wp83e"]
+[ext_resource type="Texture2D" uid="uid://qlt4xiad3mbn" path="res://assets/Portal Opening x32/start_bubble.png" id="45_5j4va"]
+[ext_resource type="Texture2D" uid="uid://um0nysap1nf2" path="res://assets/Portal Opening x32/wrong_answer_bubble.png" id="46_csbny"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_47wuj"]
 animations = [{
@@ -213,3 +218,26 @@ texture = ExtResource("2_f62eo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7, 33)
 shape = SubResource("CircleShape2D_m7kpt")
+
+[node name="move" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("42_7m06i")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="no" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("43_n1jj2")
+volume_db = -10.0
+bus = &"sfx"
+
+[node name="fall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("44_wp83e")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="StartBubble" type="Sprite2D" parent="."]
+position = Vector2(-152, -237)
+texture = ExtResource("45_5j4va")
+
+[node name="WrongAnswerBubble" type="Sprite2D" parent="."]
+position = Vector2(-155, -235)
+texture = ExtResource("46_csbny")

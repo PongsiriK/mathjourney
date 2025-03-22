@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 @onready var animation = $animation
 
+@onready var move = $move
 
+@onready var no = $no
 	
 #var is_jumping = false
 
@@ -32,12 +34,14 @@ func play_jump_L():
 	animation.flip_h = true
 	animation.position.x = 50
 	animation.play("jump")
+	move.play()
 	await animation.animation_finished
 	animation.play("stand")
 
 func play_jump():
 	
 	animation.play("jump")
+	move.play()
 	await animation.animation_finished
 	animation.play("stand")
 	
@@ -45,11 +49,20 @@ func play_jump_R():
 	animation.flip_h = false
 	animation.position.x = -50
 	animation.play("jump")
+	move.play()
 	await animation.animation_finished
 	animation.play("stand")
-
+	
+func wait(seconds: float):
+	await get_tree().create_timer(seconds).timeout
+	
 func wrong():
 	animation.play("wrong2")
+	no.play()
+	$StartBubble.show()
+	await  wait(1.5)
+	$StartBubble.hide()
+	
 	await animation.animation_finished
 	animation.play("stand")
 

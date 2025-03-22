@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var resume = $Sprite2D/resume
-@onready var back = $Sprite2D/back
+@onready var resume = $re
+@onready var back = $ba
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	z_index = 11
@@ -24,9 +24,11 @@ func allow_all():
 
 
 signal resume_game
-func _on_resume_pressed() -> void:
+
+
+func _on_re_pressed() -> void:
 	emit_signal("resume_game")
 
 
-func _on_back_pressed() -> void:
+func _on_ba_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

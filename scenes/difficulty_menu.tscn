@@ -57,7 +57,7 @@ grow_vertical = 2
 script = ExtResource("1_umj6l")
 
 [node name="BackgroundPic" type="Sprite2D" parent="."]
-position = Vector2(1356, 810)
+position = Vector2(1329, 756)
 scale = Vector2(1.88893, 1.59831)
 texture = ExtResource("1_nex63")
 
@@ -134,7 +134,7 @@ grow_vertical = 2
 scale = Vector2(1.42921, 1.49401)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(962, 542)
+position = Vector2(962, 535)
 
 [node name="Transition_SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_1gmxe")

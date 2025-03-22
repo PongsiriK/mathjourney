@@ -77,9 +77,9 @@ func _on_easy_pressed():
 func _on_medium_pressed() -> void:
 	print("✅ You choose MEDIUM mode") 
 	await play_zoom_animation()
-	get_tree().change_scene_to_file("res://scenes/newmain.tscn")
+	get_tree().change_scene_to_file("res://scenes/playgame_easy_mid.tscn")
 	
 func _on_hard_pressed() -> void:
 	print("✅ You choose HARD mode") 
 	await play_zoom_animation()
-	get_tree().change_scene_to_file("res://scenes/playgame_hard.tscn")
+	get_tree().change_scene_to_file("res://scenes/playgame_easy_hard.tscn")

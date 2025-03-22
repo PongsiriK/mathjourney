@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtvww0p2h7xqe"]
+[gd_scene load_steps=6 format=3 uid="uid://dtvww0p2h7xqe"]
 
 [ext_resource type="Script" path="res://scripts/potion.gd" id="1_3ynen"]
-[ext_resource type="Texture2D" uid="uid://diixifaob0yhc" path="res://assets/pngegg (1).png" id="2_o0ggr"]
+[ext_resource type="Texture2D" uid="uid://bfu6qlqh5pmge" path="res://assets/aaa/red-potion-clipart-xl.png" id="2_vsj2y"]
 [ext_resource type="Script" path="res://scripts/effect_key/รูปวงกลม.gd" id="3_7o56g"]
+[ext_resource type="AudioStream" uid="uid://fira0afkh06e" path="res://item-pick-up-38258.mp3" id="4_6ginp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4b45o"]
 
@@ -10,13 +11,17 @@
 script = ExtResource("1_3ynen")
 
 [node name="รูปวงกลม" type="Sprite2D" parent="."]
-position = Vector2(0, -105)
-scale = Vector2(0.0745443, 0.15332)
-texture = ExtResource("2_o0ggr")
+position = Vector2(5, -103)
+scale = Vector2(0.076295, 0.0843994)
+texture = ExtResource("2_vsj2y")
 script = ExtResource("3_7o56g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.86887, 5.08803)
 shape = SubResource("CapsuleShape2D_4b45o")
+
+[node name="get_potion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6ginp")
+bus = &"sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

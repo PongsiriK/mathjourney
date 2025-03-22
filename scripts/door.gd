@@ -14,5 +14,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 func open():
 	animation.play("open")
+	$"The-portal-90750".play()
 	await animation.animation_finished
 	animation.play("loop")
